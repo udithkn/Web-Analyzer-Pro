@@ -1,50 +1,38 @@
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
-
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="google5cc9dc46bb8c5d12">
-    <title>Website Style Extractor</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>Website Style Extractor | Extract Colors, Fonts & Animations</title>
+    <meta name="description" content="Extract and analyze fonts, colors, and animations from any website. Get instant style insights and downloadable reports for web design inspiration.">
+    <meta name="keywords" content="website style extractor, css extractor, web design tools, color palette, font extraction, animation analysis">
+    <meta name="author" content="Your Company Name">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Website Style Extractor | Web Design Analysis Tool">
+    <meta property="og:description" content="Extract and analyze fonts, colors, and animations from any website. Get instant style insights for your web design projects.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourdomain.com/style-extractor">
+    <meta property="og:image" content="https://yourdomain.com/images/style-extractor-preview.jpg">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Website Style Extractor Tool">
+    <meta name="twitter:description" content="Extract fonts, colors, and animations from any website with our free online tool.">
+    <meta name="twitter:image" content="https://yourdomain.com/images/style-extractor-preview.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://yourdomain.com/style-extractor">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <!-- Font Loading with Font Display Swap -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --primary-color: #10B981; /* Vibrant emerald for buttons and accents */
@@ -109,6 +97,12 @@
             position: relative;
         }
 
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
         input[type="text"] {
             width: 100%;
             padding: 14px 16px;
@@ -150,6 +144,7 @@
             color: var(--text-color);
             cursor: pointer;
             transition: var(--transition);
+            margin-bottom: 0;
         }
 
         .filter-group input[type="checkbox"] {
@@ -336,23 +331,53 @@
             }
         }
     </style>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Website Style Extractor",
+      "description": "Extract and analyze fonts, colors, and animations from any website. Get instant style insights and downloadable reports.",
+      "applicationCategory": "WebApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Extract website fonts",
+        "Extract color palettes",
+        "Identify animations",
+        "Download style reports",
+        "Preview extracted styles"
+      ]
+    }
+    </script>
 </head>
 <body>
-    <main class="container">
+    <main class="container" role="main">
         <h1>Website Style Extractor</h1>
         <section class="input-group">
-            <input type="text" id="urlInput" placeholder="Enter website URL (e.g., https://example.com)">
+            <label for="urlInput" class="sr-only">Website URL</label>
+            <input type="text" id="urlInput" placeholder="Enter website URL (e.g., https://example.com)" aria-label="Enter website URL" required>
         </section>
-        <section class="filter-group">
-            <label><input type="checkbox" id="fontsFilter" checked> Fonts</label>
-            <label><input type="checkbox" id="colorsFilter" checked> Colors</label>
-            <label><input type="checkbox" id="animationsFilter" checked> Animations</label>
+        <section class="filter-group" aria-labelledby="filter-heading">
+            <span id="filter-heading" class="sr-only">Filter Options</span>
+            <label><input type="checkbox" id="fontsFilter" checked aria-label="Extract fonts"> Fonts</label>
+            <label><input type="checkbox" id="colorsFilter" checked aria-label="Extract colors"> Colors</label>
+            <label><input type="checkbox" id="animationsFilter" checked aria-label="Extract animations"> Animations</label>
         </section>
-        <button onclick="extractStyles()">Extract Styles</button>
-        <section id="results"></section>
-        <section id="preview"></section>
-        <button onclick="downloadStyles()" style="display: none;" id="downloadBtn">Download Styles</button>
+        <button onclick="extractStyles()" aria-label="Extract Styles Button">Extract Styles</button>
+        <section id="results" aria-live="polite"></section>
+        <section id="preview" aria-live="polite"></section>
+        <button onclick="downloadStyles()" style="display: none;" id="downloadBtn" aria-label="Download Styles Button">Download Styles</button>
     </main>
+
+    <noscript>
+        <div class="error">This tool requires JavaScript to function. Please enable JavaScript in your browser settings.</div>
+    </noscript>
 
     <script>
         var gk_isXlsx = false;
@@ -422,6 +447,9 @@
                 resultsDiv.innerHTML = '<p class="error">Please enter a valid URL starting with http:// or https://</p>';
                 return;
             }
+
+            // Show loader
+            resultsDiv.innerHTML = '<p>Extracting styles, please wait...</p>';
 
             try {
                 const html = await fetchWithProxy(url);
@@ -568,7 +596,7 @@
                     const url = URL.createObjectURL(blob);
                     const a = document.createElement('a');
                     a.href = url;
-                    a.download = 'styles.json';
+                    a.download = `style-extract-${new Date().toISOString().split('T')[0]}.json`;
                     a.click();
                     URL.revokeObjectURL(url);
                 };
@@ -577,47 +605,33 @@
                 resultsDiv.innerHTML = `<p class="error">Error: ${error.message}. Try a simpler URL (e.g., https://example.com), disable VPN, or check if the website has anti-bot protections (e.g., Cloudflare).</p>`;
             }
         }
-    </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93c1b3b2f80b53c8',t:'MTc0NjYzMTIzMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
-<script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
 
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
-
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
-
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
+        // Handle Enter key press in URL input
+        document.getElementById('urlInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                extractStyles();
             }
-        }
-        return gk_fileData[filename] || "";
-        }
-</script>
+        });
+
+        // Track user interactions for analytics
+        document.getElementById('extractBtn')?.addEventListener('click', function() {
+            if (typeof gtag === 'function') {
+                gtag('event', 'extract_styles', {
+                    'event_category': 'engagement',
+                    'event_label': document.getElementById('urlInput').value
+                });
+            }
+        });
+
+        document.getElementById('downloadBtn')?.addEventListener('click', function() {
+            if (typeof gtag === 'function') {
+                gtag('event', 'download_styles', {
+                    'event_category': 'conversion',
+                    'event_label': document.getElementById('urlInput').value
+                });
+            }
+        });
+    </script>
 </body>
 </html>
