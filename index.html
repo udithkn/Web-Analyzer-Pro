@@ -1,0 +1,581 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Style Extractor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #10B981; /* Vibrant emerald for buttons and accents */
+            --secondary-color: #1F2937; /* Dark slate for containers */
+            --background-color: #111827; /* Deep navy for body */
+            --text-color: #F9FAFB; /* Crisp white for text */
+            --border-color: #374151; /* Subtle gray for borders */
+            --accent-color: #FBBF24; /* Warm amber for highlights */
+            --error-color: #EF4444; /* Bright red for errors */
+            --warning-color: #F59E0B; /* Orange for warnings */
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            --glass-bg: rgba(31, 41, 55, 0.7); /* Glassmorphism background */
+            --glass-blur: blur(12px);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--background-color) 0%, #1e293b 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            width: 90%;
+            max-width: 960px;
+            margin: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: var(--text-color);
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .input-group {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        input[type="text"]::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .filter-group label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-group input[type="checkbox"] {
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+            background: transparent;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-group input[type="checkbox"]:checked {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='white'%3E%3Cpath fill-rule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' clip-rule='evenodd'/%3E%3C/svg%3E");
+            background-size: 14px;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        button {
+            background: var(--primary-color);
+            color: var(--text-color);
+            padding: 14px 32px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: block;
+            margin: 1.5rem auto;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        button:hover::after {
+            left: 100%;
+        }
+
+        button:hover {
+            background: #059669;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        #results, #preview {
+            margin-top: 2rem;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        #results h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+
+        #results h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 1.5rem 0 1rem;
+            color: var(--accent-color);
+        }
+
+        #results ul {
+            list-style: none;
+            display: grid;
+            gap: 1rem;
+            max-width: 100%;
+        }
+
+        #results li {
+            padding: 1rem;
+            border-left: 4px solid var(--accent-color);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            max-width: 100%;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            transition: var(--transition);
+        }
+
+        #results li:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        #preview div {
+            border-radius: 8px;
+            text-align: center;
+            max-width: 100%;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            padding: 1.5rem;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .error {
+            color: var(--error-color);
+            text-align: center;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 1rem;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: 6px;
+        }
+
+        .warning {
+            color: var(--warning-color);
+            text-align: center;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 1rem;
+            background: rgba(245, 158, 11, 0.1);
+            border-radius: 6px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 2rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            button {
+                width: 100%;
+                padding: 12px;
+            }
+
+            #results, #preview {
+                padding: 1.5rem;
+            }
+
+            .filter-group {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            input[type="text"] {
+                padding: 12px;
+                font-size: 0.95rem;
+            }
+
+            .filter-group label {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <h1>Website Style Extractor</h1>
+        <section class="input-group">
+            <input type="text" id="urlInput" placeholder="Enter website URL (e.g., https://example.com)">
+        </section>
+        <section class="filter-group">
+            <label><input type="checkbox" id="fontsFilter" checked> Fonts</label>
+            <label><input type="checkbox" id="colorsFilter" checked> Colors</label>
+            <label><input type="checkbox" id="animationsFilter" checked> Animations</label>
+        </section>
+        <button onclick="extractStyles()">Extract Styles</button>
+        <section id="results"></section>
+        <section id="preview"></section>
+        <button onclick="downloadStyles()" style="display: none;" id="downloadBtn">Download Styles</button>
+    </main>
+
+    <script>
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+
+        function filledCell(cell) {
+            return cell !== '' && cell != null;
+        }
+
+        function loadFileData(filename) {
+            if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+                try {
+                    var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                    var firstSheetName = workbook.SheetNames[0];
+                    var worksheet = workbook.Sheets[firstSheetName];
+                    var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                    var filteredData = jsonData.filter(row => row.some(filledCell));
+                    var headerRowIndex = filteredData.findIndex((row, index) => {
+                        if (index + 1 >= filteredData.length) return false;
+                        return row.filter(filledCell).length >= filteredData[index + 1].filter(filledCell).length;
+                    });
+                    if (headerRowIndex === -1 || headerRowIndex > 25) {
+                        headerRowIndex = 0;
+                    }
+                    var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex));
+                    csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                    return csv;
+                } catch (e) {
+                    console.error(e);
+                    return "";
+                }
+            }
+            return gk_fileData[filename] || "";
+        }
+
+        const proxies = [
+            'https://api.allorigins.win/raw?url=',
+            'https://thingproxy.freeboard.io/fetch/',
+            'https://cors-anywhere.herokuapp.com/'
+        ];
+
+        async function fetchWithProxy(url, proxyIndex = 0) {
+            if (proxyIndex >= proxies.length) {
+                throw new Error('Unable to fetch the URL. All proxy services failed, possibly due to website restrictions (e.g., anti-bot measures like Cloudflare) or network issues.');
+            }
+            try {
+                const response = await fetch(proxies[proxyIndex] + encodeURIComponent(url));
+                if (!response.ok) throw new Error(`Proxy ${proxies[proxyIndex]} failed with status ${response.status}`);
+                return await response.text();
+            } catch (error) {
+                return fetchWithProxy(url, proxyIndex + 1);
+            }
+        }
+
+        async function extractStyles() {
+            const url = document.getElementById('urlInput').value;
+            const resultsDiv = document.getElementById('results');
+            const previewDiv = document.getElementById('preview');
+            const downloadBtn = document.getElementById('downloadBtn');
+            resultsDiv.innerHTML = '';
+            previewDiv.innerHTML = '';
+            downloadBtn.style.display = 'none';
+            let fetchWarnings = [];
+
+            if (!url.match(/^https?:\/\//)) {
+                resultsDiv.innerHTML = '<p class="error">Please enter a valid URL starting with http:// or https://</p>';
+                return;
+            }
+
+            try {
+                const html = await fetchWithProxy(url);
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+
+                const styles = {
+                    fonts: new Set(),
+                    colors: new Set(),
+                    animations: new Set(),
+                    background: null,
+                    inlineStyles: [],
+                    styleTags: [],
+                    externalStyles: []
+                };
+
+                doc.querySelectorAll('[style]').forEach(element => {
+                    const style = element.getAttribute('style');
+                    styles.inlineStyles.push({ element: element.tagName, style });
+                    try {
+                        if (style.includes('font-family')) {
+                            const fontMatch = style.match(/font-family:\s*([^;]+?)(?:;|$)/);
+                            if (fontMatch && fontMatch[1]) styles.fonts.add(fontMatch[1].trim());
+                        }
+                        if (style.includes('color') || style.includes('background-color')) {
+                            const colorMatch = style.match(/(?:color|background-color):\s*([^;]+?)(?:;|$)/);
+                            if (colorMatch && colorMatch[1]) styles.colors.add(colorMatch[1].trim());
+                        }
+                    } catch (e) {
+                        fetchWarnings.push(`Failed to parse inline style: ${style}`);
+                    }
+                });
+
+                doc.querySelectorAll('style').forEach(styleTag => {
+                    const css = styleTag.textContent;
+                    styles.styleTags.push(css);
+                    try {
+                        if (css.includes('font-family')) {
+                            const fonts = css.match(/font-family:\s*([^;]+?)(?:;|$)/g)?.map(f => f.match(/font-family:\s*([^;]+?)(?:;|$)/)[1].trim());
+                            fonts?.forEach(f => styles.fonts.add(f));
+                        }
+                        if (css.includes('color') || css.includes('background-color')) {
+                            const colors = css.match(/(?:color|background-color):\s*([^;]+?)(?:;|$)/g)?.map(c => c.match(/(?:color|background-color):\s*([^;]+?)(?:;|$)/)[1].trim());
+                            colors?.forEach(c => styles.colors.add(c));
+                        }
+                        if (css.includes('@keyframes')) {
+                            const animations = css.match(/@keyframes\s+([^{]+)/g)?.map(a => a.match(/@keyframes\s+([^ {]+)/)[1].trim());
+                            animations?.forEach(a => styles.animations.add(a));
+                        }
+                    } catch (e) {
+                        fetchWarnings.push(`Failed to parse style tag: ${css}`);
+                    }
+                });
+
+                const styleSheets = Array.from(doc.querySelectorAll('link[rel="stylesheet"]')).map(link => link.href);
+                for (const sheet of styleSheets) {
+                    try {
+                        const css = await fetchWithProxy(sheet);
+                        styles.externalStyles.push(css);
+                        if (css.includes('font-family')) {
+                            const fonts = css.match(/font-family:\s*([^;]+?)(?:;|$)/g)?.map(f => f.match(/font-family:\s*([^;]+?)(?:;|$)/)[1].trim());
+                            fonts?.forEach(f => styles.fonts.add(f));
+                        }
+                        if (css.includes('color') || css.includes('background-color')) {
+                            const colors = css.match(/(?:color|background-color):\s*([^;]+?)(?:;|$)/g)?.map(c => c.match(/(?:color|background-color):\s*([^;]+?)(?:;|$)/)[1].trim());
+                            colors?.forEach(c => styles.colors.add(c));
+                        }
+                        if (css.includes('@keyframes')) {
+                            const animations = css.match(/@keyframes\s+([^{]+)/g)?.map(a => a.match(/@keyframes\s+([^ {]+)/)[1].trim());
+                            animations?.forEach(a => styles.animations.add(a));
+                        }
+                    } catch (error) {
+                        fetchWarnings.push(`Failed to fetch stylesheet: ${sheet}`);
+                    }
+                }
+
+                const bodyStyle = doc.body.getAttribute('style') || '';
+                try {
+                    if (bodyStyle.includes('background')) {
+                        styles.background = bodyStyle.match(/background:\s*([^;]+?)(?:;|$)/)?.[1]?.trim() || bodyStyle.match(/background-color:\s*([^;]+?)(?:;|$)/)?.[1]?.trim();
+                    }
+                } catch (e) {
+                    fetchWarnings.push(`Failed to parse body style: ${bodyStyle}`);
+                }
+
+                const suggestions = {
+                    fonts: Array.from(styles.fonts).map(f => ({
+                        original: f,
+                        suggestion: f.includes('Times') ? 'Consider using a modern serif like Georgia' : 'Looks good!'
+                    })),
+                    colors: Array.from(styles.colors).map(c => ({
+                        original: c,
+                        suggestion: c.includes('rgb') ? 'Consider using hex for consistency' : 'Looks good!'
+                    }))
+                };
+
+                const filters = {
+                    fonts: document.getElementById('fontsFilter').checked,
+                    colors: document.getElementById('colorsFilter').checked,
+                    animations: document.getElementById('animationsFilter').checked
+                };
+
+                let resultsHTML = '<h2>Extracted Styles</h2>';
+                if (filters.fonts && styles.fonts.size) {
+                    resultsHTML += `<h3>Fonts (Used for text styling):</h3><ul>${Array.from(styles.fonts).slice(0, 3).map(f => `<li>${f} - ${suggestions.fonts.find(s => s.original === f)?.suggestion || 'No suggestion'}</li>`).join('')}</ul>`;
+                }
+                if (filters.colors && styles.colors.size) {
+                    resultsHTML += `<h3>Colors (Used for visual appeal):</h3><ul>${Array.from(styles.colors).slice(0, 3).map(c => `<li>${c} - ${suggestions.colors.find(s => s.original === c)?.suggestion || 'No suggestion'}</li>`).join('')}</ul>`;
+                }
+                if (filters.animations && styles.animations.size) {
+                    resultsHTML += `<h3>Animations (Used for dynamic effects):</h3><ul>${Array.from(styles.animations).slice(0, 3).map(a => `<li>${a}</li>`).join('')}</ul>`;
+                }
+                if (styles.background) {
+                    resultsHTML += `<h3>Body Background:</h3><p>${styles.background}</p>`;
+                }
+                if (fetchWarnings.length > 0) {
+                    resultsHTML += `<p class="warning">Note: Some stylesheets could not be fetched, but available styles are displayed.</p>`;
+                }
+                resultsDiv.innerHTML = resultsHTML;
+
+                if (filters.colors && styles.colors.size) {
+                    const color = Array.from(styles.colors)[0];
+                    previewDiv.innerHTML = `<h3>Preview:</h3><div style="background-color: ${color}; padding: 20px; color: white;">Sample Text</div>`;
+                }
+
+                const jsonData = {
+                    url,
+                    extractedAt: new Date().toISOString(),
+                    styles: {
+                        fonts: filters.fonts ? Array.from(styles.fonts) : [],
+                        colors: filters.colors ? Array.from(styles.colors) : [],
+                        animations: filters.animations ? Array.from(styles.animations) : [],
+                        background: styles.background,
+                        inlineStyles: styles.inlineStyles,
+                        styleTags: styles.styleTags,
+                        externalStyles: styles.externalStyles
+                    },
+                    suggestions,
+                    warnings: fetchWarnings
+                };
+                downloadBtn.style.display = 'block';
+                downloadBtn.onclick = () => {
+                    const blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: 'application/json' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'styles.json';
+                    a.click();
+                    URL.revokeObjectURL(url);
+                };
+
+            } catch (error) {
+                resultsDiv.innerHTML = `<p class="error">Error: ${error.message}. Try a simpler URL (e.g., https://example.com), disable VPN, or check if the website has anti-bot protections (e.g., Cloudflare).</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
