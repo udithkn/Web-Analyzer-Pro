@@ -3,634 +3,669 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="google5cc9dc46bb8c5d12">
+    <title>Web Analyzer Pro - In-Depth Website Analysis</title>
     
     <!-- SEO Meta Tags -->
-    <title>Website Style Extractor | Extract Colors, Fonts & Animations</title>
-    <meta name="description" content="Extract and analyze fonts, colors, and animations from any website. Get instant style insights and downloadable reports for web design inspiration.">
-    <meta name="keywords" content="website style extractor, css extractor, web design tools, color palette, font extraction, animation analysis">
-    <meta name="author" content="Your Company Name">
-    
-    <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="Website Style Extractor | Web Design Analysis Tool">
-    <meta property="og:description" content="Extract and analyze fonts, colors, and animations from any website. Get instant style insights for your web design projects.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yourdomain.com/style-extractor">
-    <meta property="og:image" content="https://yourdomain.com/images/style-extractor-preview.jpg">
-    
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Website Style Extractor Tool">
-    <meta name="twitter:description" content="Extract fonts, colors, and animations from any website with our free online tool.">
-    <meta name="twitter:image" content="https://yourdomain.com/images/style-extractor-preview.jpg">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://yourdomain.com/style-extractor">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon.png">
-    
-    <!-- Font Loading with Font Display Swap -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <meta name="description" content="A professional tool for in-depth website analysis. Get detailed reports on performance, accessibility, SEO, color palettes, typography, assets, and technology stack.">
+    <meta name="keywords" content="website analyzer, performance audit, accessibility checker, seo audit, style extractor, tech stack detector, web design tool, color contrast checker">
+    <meta name="author" content="Gemini">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
     <style>
-        :root {
-            --primary-color: #10B981; /* Vibrant emerald for buttons and accents */
-            --secondary-color: #1F2937; /* Dark slate for containers */
-            --background-color: #111827; /* Deep navy for body */
-            --text-color: #F9FAFB; /* Crisp white for text */
-            --border-color: #374151; /* Subtle gray for borders */
-            --accent-color: #FBBF24; /* Warm amber for highlights */
-            --error-color: #EF4444; /* Bright red for errors */
-            --warning-color: #F59E0B; /* Orange for warnings */
-            --shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-            --glass-bg: rgba(31, 41, 55, 0.7); /* Glassmorphism background */
-            --glass-blur: blur(12px);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+        /* Custom Styles */
         body {
             font-family: 'Inter', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, var(--background-color) 0%, #1e293b 100%);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
+            background-color: #0f172a; /* Slate 900 */
+            color: #f8fafc; /* Slate 50 */
         }
-
-        .container {
-            background: var(--glass-bg);
-            backdrop-filter: var(--glass-blur);
-            padding: 2.5rem;
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            width: 90%;
-            max-width: 960px;
-            margin: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: var(--transition);
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #1e293b; }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+        .focus-ring:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.6); }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loader { animation: spin 1s linear infinite; }
+        .tab-content { transition: opacity 0.3s ease-in-out; }
+        
+        /* Custom class for scrollable tabs on mobile */
+        .scrollable-tabs::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for a cleaner look */
         }
-
-        h1 {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 2rem;
-            color: var(--text-color);
-            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .input-group {
-            margin-bottom: 2rem;
-            position: relative;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 14px 16px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-color);
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        input[type="text"]::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        input[type="text"]:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .filter-group {
-            display: flex;
-            gap: 1.5rem;
-            margin: 1.5rem 0;
-            flex-wrap: wrap;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1rem;
-            border-radius: 8px;
-        }
-
-        .filter-group label {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--text-color);
-            cursor: pointer;
-            transition: var(--transition);
-            margin-bottom: 0;
-        }
-
-        .filter-group input[type="checkbox"] {
-            appearance: none;
-            width: 18px;
-            height: 18px;
-            border: 2px solid var(--border-color);
-            border-radius: 4px;
-            background: transparent;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .filter-group input[type="checkbox"]:checked {
-            background: var(--primary-color);
-            border-color: var(--primary-color);
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='white'%3E%3Cpath fill-rule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' clip-rule='evenodd'/%3E%3C/svg%3E");
-            background-size: 14px;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        button {
-            background: var(--primary-color);
-            color: var(--text-color);
-            padding: 14px 32px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: 600;
-            display: block;
-            margin: 1.5rem auto;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-        }
-
-        button::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.2),
-                transparent
-            );
-            transition: 0.5s;
-        }
-
-        button:hover::after {
-            left: 100%;
-        }
-
-        button:hover {
-            background: #059669;
-            transform: translateY(-3px);
-            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
-        }
-
-        button:active {
-            transform: translateY(0);
-        }
-
-        #results, #preview {
-            margin-top: 2rem;
-            padding: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            background: var(--glass-bg);
-            backdrop-filter: var(--glass-blur);
-            max-width: 100%;
-            overflow: hidden;
-        }
-
-        #results h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: var(--text-color);
-        }
-
-        #results h3 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin: 1.5rem 0 1rem;
-            color: var(--accent-color);
-        }
-
-        #results ul {
-            list-style: none;
-            display: grid;
-            gap: 1rem;
-            max-width: 100%;
-        }
-
-        #results li {
-            padding: 1rem;
-            border-left: 4px solid var(--accent-color);
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 6px;
-            max-width: 100%;
-            overflow-wrap: break-word;
-            word-break: break-word;
-            transition: var(--transition);
-        }
-
-        #results li:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateX(5px);
-        }
-
-        #preview div {
-            border-radius: 8px;
-            text-align: center;
-            max-width: 100%;
-            overflow-wrap: break-word;
-            word-break: break-word;
-            padding: 1.5rem;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .error {
-            color: var(--error-color);
-            text-align: center;
-            font-size: 0.95rem;
-            font-weight: 500;
-            padding: 1rem;
-            background: rgba(239, 68, 68, 0.1);
-            border-radius: 6px;
-        }
-
-        .warning {
-            color: var(--warning-color);
-            text-align: center;
-            font-size: 0.95rem;
-            font-weight: 500;
-            padding: 1rem;
-            background: rgba(245, 158, 11, 0.1);
-            border-radius: 6px;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                width: 95%;
-                padding: 2rem;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            button {
-                width: 100%;
-                padding: 12px;
-            }
-
-            #results, #preview {
-                padding: 1.5rem;
-            }
-
-            .filter-group {
-                flex-direction: column;
-                gap: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            input[type="text"] {
-                padding: 12px;
-                font-size: 0.95rem;
-            }
-
-            .filter-group label {
-                font-size: 0.9rem;
-            }
+        .scrollable-tabs {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
         }
     </style>
-    
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Website Style Extractor",
-      "description": "Extract and analyze fonts, colors, and animations from any website. Get instant style insights and downloadable reports.",
-      "applicationCategory": "WebApplication",
-      "operatingSystem": "All",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "featureList": [
-        "Extract website fonts",
-        "Extract color palettes",
-        "Identify animations",
-        "Download style reports",
-        "Preview extracted styles"
-      ]
-    }
-    </script>
 </head>
-<body>
-    <main class="container" role="main">
-        <h1>Website Style Extractor</h1>
-        <section class="input-group">
-            <label for="urlInput" class="sr-only">Website URL</label>
-            <input type="text" id="urlInput" placeholder="Enter website URL (e.g., https://example.com)" aria-label="Enter website URL" required>
-        </section>
-        <section class="filter-group" aria-labelledby="filter-heading">
-            <span id="filter-heading" class="sr-only">Filter Options</span>
-            <label><input type="checkbox" id="fontsFilter" checked aria-label="Extract fonts"> Fonts</label>
-            <label><input type="checkbox" id="colorsFilter" checked aria-label="Extract colors"> Colors</label>
-            <label><input type="checkbox" id="animationsFilter" checked aria-label="Extract animations"> Animations</label>
-        </section>
-        <button onclick="extractStyles()" aria-label="Extract Styles Button">Extract Styles</button>
-        <section id="results" aria-live="polite"></section>
-        <section id="preview" aria-live="polite"></section>
-        <button onclick="downloadStyles()" style="display: none;" id="downloadBtn" aria-label="Download Styles Button">Download Styles</button>
-    </main>
+<body class="antialiased">
 
-    <noscript>
-        <div class="error">This tool requires JavaScript to function. Please enable JavaScript in your browser settings.</div>
-    </noscript>
+    <div class="min-h-screen flex flex-col lg:flex-row">
+        <!-- Sidebar -->
+        <aside class="w-full lg:w-96 bg-slate-900/80 backdrop-blur-sm border-r border-slate-700/50 p-4 sm:p-6 lg:p-8 flex-shrink-0">
+            <div class="flex items-center gap-3 mb-8">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-400"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="m10 10.5 4 4"/><path d="m10 14.5 4-4"/></svg>
+                <h1 class="text-2xl font-bold text-slate-100">Web Analyzer Pro</h1>
+            </div>
+
+            <div class="space-y-6">
+                <div>
+                    <label for="urlInput" class="text-sm font-medium text-slate-300 mb-2 block">Website URL</label>
+                    <div class="relative">
+                        <i data-lucide="link-2" class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"></i>
+                        <input type="url" id="urlInput" placeholder="https://example.com" class="w-full bg-slate-800/50 border border-slate-700 rounded-lg pl-10 pr-4 py-2.5 text-slate-100 placeholder-slate-500 focus-ring">
+                    </div>
+                </div>
+                <button id="extractBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center gap-2 focus-ring transition-colors duration-200">
+                    <i data-lucide="wand-2" class="w-5 h-5"></i>
+                    <span>Analyze Website</span>
+                </button>
+            </div>
+            
+            <div id="message-area" class="mt-6"></div>
+            <div id="download-area" class="mt-6"></div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
+            <div id="initial-state" class="h-full flex flex-col items-center justify-center text-center">
+                 <i data-lucide="search-code" class="w-24 h-24 text-slate-600 mb-4"></i>
+                 <h2 class="text-2xl font-bold text-slate-300">In-Depth Website Analysis</h2>
+                 <p class="text-slate-400 mt-2 max-w-md">Enter a URL for a comprehensive report on performance, accessibility, SEO, and more.</p>
+            </div>
+
+            <div id="loading-state" class="hidden h-full flex flex-col items-center justify-center">
+                <i data-lucide="loader-2" class="w-16 h-16 text-blue-400 loader"></i>
+                <p class="text-slate-300 mt-4 text-lg">Performing deep analysis...</p>
+                <p id="loading-status" class="text-slate-500 mt-1 text-sm">Fetching website content...</p>
+            </div>
+
+            <div id="results-state" class="hidden">
+                <div class="border-b border-slate-700 mb-6">
+                    <nav id="tabs" class="-mb-px flex space-x-6 overflow-x-auto scrollable-tabs" aria-label="Tabs"></nav>
+                </div>
+                <div id="tab-content-container"></div>
+            </div>
+        </main>
+    </div>
 
     <script>
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-
-        function filledCell(cell) {
-            return cell !== '' && cell != null;
+        // --- UTILITY AND HELPER FUNCTIONS ---
+        const $ = (selector) => document.querySelector(selector);
+        const $$ = (selector) => document.querySelectorAll(selector);
+        
+        function slugify(text) {
+            return text.toString().toLowerCase()
+                .replace(/\s+/g, '-').replace(/[^\w-]+/g, '')
+                .replace(/--+/g, '-').replace(/^-+/, '').replace(/-+$/, '');
         }
 
-        function loadFileData(filename) {
-            if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+        async function fetchWithProxy(url) {
+            const proxies = [
+                `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+                `https://corsproxy.io/?${encodeURIComponent(url)}`,
+                `https://thingproxy.freeboard.io/fetch/${url}`
+            ];
+            for (const proxyUrl of proxies) {
+                const proxyName = new URL(proxyUrl).hostname;
                 try {
-                    var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                    var firstSheetName = workbook.SheetNames[0];
-                    var worksheet = workbook.Sheets[firstSheetName];
-                    var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                    var filteredData = jsonData.filter(row => row.some(filledCell));
-                    var headerRowIndex = filteredData.findIndex((row, index) => {
-                        if (index + 1 >= filteredData.length) return false;
-                        return row.filter(filledCell).length >= filteredData[index + 1].filter(filledCell).length;
-                    });
-                    if (headerRowIndex === -1 || headerRowIndex > 25) {
-                        headerRowIndex = 0;
+                    console.log(`Attempting to fetch via ${proxyName}...`);
+                    const response = await fetch(proxyUrl);
+                    if (!response.ok) {
+                        console.warn(`Proxy ${proxyName} failed with status: ${response.status}`);
+                        continue;
                     }
-                    var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex));
-                    csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                    return csv;
-                } catch (e) {
-                    console.error(e);
-                    return "";
+                    const data = await response.text();
+                    if (data && !data.includes("The service is temporarily unavailable")) {
+                        console.log(`Successfully fetched using ${proxyName}`);
+                        return data;
+                    }
+                     console.warn(`Proxy ${proxyName} returned an empty or error response.`);
+                } catch (error) { 
+                    console.warn(`Fetch attempt with ${proxyName} failed:`, error);
                 }
             }
-            return gk_fileData[filename] || "";
+            throw new Error(`Could not fetch content for ${url}. All proxies failed, the site may be down, or it's blocking requests. Please try a different URL.`);
         }
 
-        const proxies = [
-            'https://api.allorigins.win/raw?url=',
-            'https://thingproxy.freeboard.io/fetch/',
-            'https://cors-anywhere.herokuapp.com/'
-        ];
-
-        async function fetchWithProxy(url, proxyIndex = 0) {
-            if (proxyIndex >= proxies.length) {
-                throw new Error('Unable to fetch the URL. All proxy services failed, possibly due to website restrictions (e.g., anti-bot measures like Cloudflare) or network issues.');
-            }
+        function copyToClipboard(text, element) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
             try {
-                const response = await fetch(proxies[proxyIndex] + encodeURIComponent(url));
-                if (!response.ok) throw new Error(`Proxy ${proxies[proxyIndex]} failed with status ${response.status}`);
-                return await response.text();
-            } catch (error) {
-                return fetchWithProxy(url, proxyIndex + 1);
-            }
+                document.execCommand('copy');
+                const originalText = element.innerHTML;
+                element.innerHTML = '<i data-lucide="check" class="w-4 h-4 text-green-400"></i> Copied!';
+                lucide.createIcons();
+                setTimeout(() => { element.innerHTML = originalText; lucide.createIcons(); }, 1500);
+            } catch (err) { console.error('Failed to copy text: ', err); }
+            document.body.removeChild(textArea);
+        }
+        
+        function showMessage(message, type = 'error') {
+            const messageArea = $('#message-area');
+            if (!messageArea) return;
+            const colors = {
+                error: 'bg-red-500/10 border-red-500/30 text-red-400',
+                warning: 'bg-yellow-500/10 border-yellow-500/30 text-yellow-400',
+            };
+            messageArea.innerHTML = `<div class="p-4 rounded-lg border ${colors[type]}"><p class="text-sm">${message}</p></div>`;
+        }
+        
+        function updateLoadingStatus(text) {
+            const statusEl = $('#loading-status');
+            if (statusEl) statusEl.textContent = text;
         }
 
-        async function extractStyles() {
-            const url = document.getElementById('urlInput').value;
-            const resultsDiv = document.getElementById('results');
-            const previewDiv = document.getElementById('preview');
-            const downloadBtn = document.getElementById('downloadBtn');
-            resultsDiv.innerHTML = '';
-            previewDiv.innerHTML = '';
-            downloadBtn.style.display = 'none';
-            let fetchWarnings = [];
-
-            if (!url.match(/^https?:\/\//)) {
-                resultsDiv.innerHTML = '<p class="error">Please enter a valid URL starting with http:// or https://</p>';
+        // --- CORE ANALYSIS LOGIC ---
+        async function analyzeWebsite() {
+            const urlInput = $('#urlInput');
+            if (!urlInput) return;
+            const url = urlInput.value.trim();
+            if (!url || !url.match(/^https?:\/\//)) {
+                showMessage('Please enter a valid URL starting with http:// or https://.');
                 return;
             }
 
-            // Show loader
-            resultsDiv.innerHTML = '<p>Extracting styles, please wait...</p>';
+            $('#message-area').innerHTML = '';
+            $('#download-area').innerHTML = '';
+            $('#initial-state')?.classList.add('hidden');
+            $('#results-state')?.classList.add('hidden');
+            $('#loading-state')?.classList.remove('hidden');
 
             try {
+                updateLoadingStatus('Fetching website content...');
                 const html = await fetchWithProxy(url);
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(html, 'text/html');
+                const baseURL = new URL(url).origin;
 
-                const styles = {
-                    fonts: new Set(),
-                    colors: new Set(),
-                    animations: new Set(),
-                    background: null,
-                    inlineStyles: [],
-                    styleTags: [],
-                    externalStyles: []
-                };
+                updateLoadingStatus('Analyzing styles and assets...');
+                const colors = extractColors(doc);
+                const typography = extractTypography(doc);
+                const assets = extractAssets(doc, baseURL);
 
-                doc.querySelectorAll('[style]').forEach(element => {
-                    const style = element.getAttribute('style');
-                    styles.inlineStyles.push({ element: element.tagName, style });
-                    try {
-                        if (style.includes('font-family')) {
-                            const fontMatch = style.match(/font-family:\s*([^;]+?)(?:;|$)/);
-                            if (fontMatch && fontMatch[1]) styles.fonts.add(fontMatch[1].trim());
-                        }
-                        if (style.includes('color') || style.includes('background-color')) {
-                            const colorMatch = style.match(/(?:color|background-color):\s*([^;]+?)(?:;|$)/);
-                            if (colorMatch && colorMatch[1]) styles.colors.add(colorMatch[1].trim());
-                        }
-                    } catch (e) {
-                        fetchWarnings.push(`Failed to parse inline style: ${style}`);
-                    }
-                });
+                updateLoadingStatus('Detecting technology stack...');
+                const techStack = detectTechStack(doc, html);
 
-                doc.querySelectorAll('style').forEach(styleTag => {
-                    const css = styleTag.textContent;
-                    styles.styleTags.push(css);
-                    try {
-                        if (css.includes('font-family')) {
-                            const fonts = css.match(/font-family:\s*([^;]+?)(?:;|$)/g)?.map(f => f.match(/font-family:\s*([^;]+?)(?:;|$)/)[1].trim());
-                            fonts?.forEach(f => styles.fonts.add(f));
-                        }
-                        if (css.includes('color') || css.includes('background-color')) {
-                            const colors = css.match(/(?:color|background-color):\s*([^;]+?)(?:;|$)/g)?.map(c => c.match(/(?:color|background-color):\s*([^;]+?)(?:;|$)/)[1].trim());
-                            colors?.forEach(c => styles.colors.add(c));
-                        }
-                        if (css.includes('@keyframes')) {
-                            const animations = css.match(/@keyframes\s+([^{]+)/g)?.map(a => a.match(/@keyframes\s+([^ {]+)/)[1].trim());
-                            animations?.forEach(a => styles.animations.add(a));
-                        }
-                    } catch (e) {
-                        fetchWarnings.push(`Failed to parse style tag: ${css}`);
-                    }
-                });
+                updateLoadingStatus('Auditing SEO and headings...');
+                const seo = extractSeoData(doc);
+                
+                updateLoadingStatus('Scanning for accessibility issues...');
+                const accessibility = checkAccessibility(doc);
+                
+                updateLoadingStatus('Checking performance metrics...');
+                const performance = checkPerformance(doc, html);
 
-                const styleSheets = Array.from(doc.querySelectorAll('link[rel="stylesheet"]')).map(link => link.href);
-                for (const sheet of styleSheets) {
-                    try {
-                        const css = await fetchWithProxy(sheet);
-                        styles.externalStyles.push(css);
-                        if (css.includes('font-family')) {
-                            const fonts = css.match(/font-family:\s*([^;]+?)(?:;|$)/g)?.map(f => f.match(/font-family:\s*([^;]+?)(?:;|$)/)[1].trim());
-                            fonts?.forEach(f => styles.fonts.add(f));
-                        }
-                        if (css.includes('color') || css.includes('background-color')) {
-                            const colors = css.match(/(?:color|background-color):\s*([^;]+?)(?:;|$)/g)?.map(c => c.match(/(?:color|background-color):\s*([^;]+?)(?:;|$)/)[1].trim());
-                            colors?.forEach(c => styles.colors.add(c));
-                        }
-                        if (css.includes('@keyframes')) {
-                            const animations = css.match(/@keyframes\s+([^{]+)/g)?.map(a => a.match(/@keyframes\s+([^ {]+)/)[1].trim());
-                            animations?.forEach(a => styles.animations.add(a));
-                        }
-                    } catch (error) {
-                        fetchWarnings.push(`Failed to fetch stylesheet: ${sheet}`);
-                    }
-                }
+                const fullReport = { url, generatedAt: new Date().toISOString(), colors, typography, assets, techStack, seo, accessibility, performance };
+                
+                updateLoadingStatus('Generating report...');
+                renderResults(fullReport);
 
-                const bodyStyle = doc.body.getAttribute('style') || '';
-                try {
-                    if (bodyStyle.includes('background')) {
-                        styles.background = bodyStyle.match(/background:\s*([^;]+?)(?:;|$)/)?.[1]?.trim() || bodyStyle.match(/background-color:\s*([^;]+?)(?:;|$)/)?.[1]?.trim();
-                    }
-                } catch (e) {
-                    fetchWarnings.push(`Failed to parse body style: ${bodyStyle}`);
-                }
-
-                const suggestions = {
-                    fonts: Array.from(styles.fonts).map(f => ({
-                        original: f,
-                        suggestion: f.includes('Times') ? 'Consider using a modern serif like Georgia' : 'Looks good!'
-                    })),
-                    colors: Array.from(styles.colors).map(c => ({
-                        original: c,
-                        suggestion: c.includes('rgb') ? 'Consider using hex for consistency' : 'Looks good!'
-                    }))
-                };
-
-                const filters = {
-                    fonts: document.getElementById('fontsFilter').checked,
-                    colors: document.getElementById('colorsFilter').checked,
-                    animations: document.getElementById('animationsFilter').checked
-                };
-
-                let resultsHTML = '<h2>Extracted Styles</h2>';
-                if (filters.fonts && styles.fonts.size) {
-                    resultsHTML += `<h3>Fonts (Used for text styling):</h3><ul>${Array.from(styles.fonts).slice(0, 3).map(f => `<li>${f} - ${suggestions.fonts.find(s => s.original === f)?.suggestion || 'No suggestion'}</li>`).join('')}</ul>`;
-                }
-                if (filters.colors && styles.colors.size) {
-                    resultsHTML += `<h3>Colors (Used for visual appeal):</h3><ul>${Array.from(styles.colors).slice(0, 3).map(c => `<li>${c} - ${suggestions.colors.find(s => s.original === c)?.suggestion || 'No suggestion'}</li>`).join('')}</ul>`;
-                }
-                if (filters.animations && styles.animations.size) {
-                    resultsHTML += `<h3>Animations (Used for dynamic effects):</h3><ul>${Array.from(styles.animations).slice(0, 3).map(a => `<li>${a}</li>`).join('')}</ul>`;
-                }
-                if (styles.background) {
-                    resultsHTML += `<h3>Body Background:</h3><p>${styles.background}</p>`;
-                }
-                if (fetchWarnings.length > 0) {
-                    resultsHTML += `<p class="warning">Note: Some stylesheets could not be fetched, but available styles are displayed.</p>`;
-                }
-                resultsDiv.innerHTML = resultsHTML;
-
-                if (filters.colors && styles.colors.size) {
-                    const color = Array.from(styles.colors)[0];
-                    previewDiv.innerHTML = `<h3>Preview:</h3><div style="background-color: ${color}; padding: 20px; color: white;">Sample Text</div>`;
-                }
-
-                const jsonData = {
-                    url,
-                    extractedAt: new Date().toISOString(),
-                    styles: {
-                        fonts: filters.fonts ? Array.from(styles.fonts) : [],
-                        colors: filters.colors ? Array.from(styles.colors) : [],
-                        animations: filters.animations ? Array.from(styles.animations) : [],
-                        background: styles.background,
-                        inlineStyles: styles.inlineStyles,
-                        styleTags: styles.styleTags,
-                        externalStyles: styles.externalStyles
-                    },
-                    suggestions,
-                    warnings: fetchWarnings
-                };
-                downloadBtn.style.display = 'block';
-                downloadBtn.onclick = () => {
-                    const blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: 'application/json' });
-                    const url = URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = `style-extract-${new Date().toISOString().split('T')[0]}.json`;
-                    a.click();
-                    URL.revokeObjectURL(url);
-                };
+                $('#loading-state')?.classList.add('hidden');
+                $('#results-state')?.classList.remove('hidden');
 
             } catch (error) {
-                resultsDiv.innerHTML = `<p class="error">Error: ${error.message}. Try a simpler URL (e.g., https://example.com), disable VPN, or check if the website has anti-bot protections (e.g., Cloudflare).</p>`;
+                console.error('Analysis failed:', error);
+                showMessage(error.message);
+                $('#loading-state')?.classList.add('hidden');
+                $('#initial-state')?.classList.remove('hidden');
             }
         }
+        
+        // --- IN-DEPTH EXTRACTION & ANALYSIS MODULES ---
 
-        // Handle Enter key press in URL input
-        document.getElementById('urlInput').addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                event.preventDefault();
-                extractStyles();
+        function extractColors(doc) {
+            const colors = new Set();
+            const colorRegex = /(#(?:[0-9a-f]{3,8})|(rgb|hsl)a?\([\d.,\s%]+\))/gi;
+            doc.querySelectorAll('[style]').forEach(el => {
+                const style = el.getAttribute('style');
+                const found = style.match(colorRegex);
+                if (found) found.forEach(c => colors.add(c.toLowerCase()));
+            });
+            doc.querySelectorAll('style').forEach(styleTag => {
+                const found = styleTag.innerHTML.match(colorRegex);
+                if (found) found.forEach(c => colors.add(c.toLowerCase()));
+            });
+            return { palette: Array.from(colors) };
+        }
+
+        function extractTypography(doc) {
+            const fontDetails = { families: new Set(), sizes: new Set(), weights: new Set() };
+            const fontFamilyRegex = /font-family:([^;]+)/gi;
+            const fontSizeRegex = /font-size:([^;]+)/gi;
+            const fontWeightRegex = /font-weight:([^;]+)/gi;
+            function parseStyle(styleText) {
+                let match;
+                while((match = fontFamilyRegex.exec(styleText)) !== null) match[1].split(',').forEach(f => fontDetails.families.add(f.trim().replace(/['"]/g, '')));
+                while((match = fontSizeRegex.exec(styleText)) !== null) fontDetails.sizes.add(match[1].trim());
+                while((match = fontWeightRegex.exec(styleText)) !== null) fontDetails.weights.add(match[1].trim());
             }
-        });
+            doc.querySelectorAll('[style]').forEach(el => parseStyle(el.getAttribute('style')));
+            doc.querySelectorAll('style').forEach(styleTag => parseStyle(styleTag.innerHTML));
+            return {
+                families: Array.from(fontDetails.families),
+                sizes: Array.from(fontDetails.sizes),
+                weights: Array.from(fontDetails.weights)
+            };
+        }
 
-        // Track user interactions for analytics
-        document.getElementById('extractBtn')?.addEventListener('click', function() {
-            if (typeof gtag === 'function') {
-                gtag('event', 'extract_styles', {
-                    'event_category': 'engagement',
-                    'event_label': document.getElementById('urlInput').value
+        function extractAssets(doc, baseURL) {
+            const assets = { images: [], svgs: [] };
+            doc.querySelectorAll('img').forEach(img => {
+                if (img.src) {
+                    try { assets.images.push({ src: new URL(img.src, baseURL).href, alt: img.alt || 'N/A' }); } catch(e) {}
+                }
+            });
+            doc.querySelectorAll('svg').forEach(svg => {
+                const svgHtml = svg.outerHTML;
+                const dataUri = `data:image/svg+xml;base64,${btoa(svgHtml)}`;
+                assets.svgs.push({ html: svgHtml, dataUri });
+            });
+            return assets;
+        }
+
+        function detectTechStack(doc, html) {
+            const tech = new Set();
+            const detections = {
+                'React': () => doc.querySelector('[data-reactroot], #___gatsby, #__next'),
+                'Vue.js': () => doc.querySelector('#app[data-v-app]'),
+                'Angular': () => doc.querySelector('[ng-version]'),
+                'jQuery': () => html.includes('jquery.js') || html.includes('jquery.min.js'),
+                'WordPress': () => html.includes('wp-content/') || html.includes('wp-json/'),
+                'Shopify': () => html.includes('cdn.shopify.com'),
+                'Bootstrap': () => doc.querySelector('link[href*="bootstrap"], div[class*="col-"]'),
+                'Tailwind CSS': () => doc.querySelector('link[href*="tailwind"], style[id*="tailwind"]'),
+                'GSAP': () => html.includes('gsap.min.js'),
+                'Google Analytics': () => html.includes('google-analytics.com/analytics.js') || html.includes('googletagmanager.com/gtag/js'),
+            };
+            for (const [name, detector] of Object.entries(detections)) {
+                try { if (detector()) tech.add(name); } catch (e) {}
+            }
+            return Array.from(tech);
+        }
+
+        function extractSeoData(doc) {
+            const getMeta = (name) => doc.querySelector(`meta[name="${name}"], meta[property="og:${name}"]`)?.content || null;
+            const headings = {};
+            ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].forEach(h => {
+                headings[h] = Array.from(doc.querySelectorAll(h)).map(el => el.textContent.trim());
+            });
+            return {
+                title: doc.title || null,
+                description: getMeta('description'),
+                keywords: getMeta('keywords'),
+                ogTitle: getMeta('title'),
+                ogDescription: getMeta('description'),
+                ogImage: getMeta('image'),
+                headings
+            };
+        }
+
+        function checkPerformance(doc, html) {
+            const scripts = Array.from(doc.querySelectorAll('script[src]'));
+            const stylesheets = Array.from(doc.querySelectorAll('link[rel="stylesheet"]'));
+            const inlineStyles = Array.from(doc.querySelectorAll('style'));
+            return {
+                requestCounts: {
+                    totalJS: scripts.length,
+                    totalCSS: stylesheets.length,
+                },
+                scripts: scripts.map(s => ({ src: s.src, async: s.async, defer: s.defer })),
+                inlineStyleBlocks: inlineStyles.length,
+                htmlSize: {
+                    raw: html.length,
+                    formatted: `${(html.length / 1024).toFixed(2)} KB`
+                }
+            };
+        }
+
+        // --- ACCESSIBILITY MODULE (WITH COLOR CONTRAST) ---
+        function checkAccessibility(doc) {
+            const issues = [];
+            
+            doc.querySelectorAll('img:not([alt])').forEach((img, i) => {
+                issues.push({ type: 'Warning', check: 'Images', issue: `Image ${i + 1} is missing an alt attribute.`, element: img.outerHTML });
+            });
+
+            doc.querySelectorAll('a').forEach((a, i) => {
+                if (!a.innerText.trim() && !a.querySelector('img[alt]')) {
+                     issues.push({ type: 'Warning', check: 'Links', issue: `Link ${i + 1} has no discernible text.`, element: a.outerHTML });
+                }
+            });
+            
+            doc.querySelectorAll('input, textarea, select').forEach((input, i) => {
+                if(!input.id) return;
+                if(!doc.querySelector(`label[for="${input.id}"]`)) {
+                    issues.push({ type: 'Warning', check: 'Forms', issue: `Input element (id: ${input.id}) has no associated label.`, element: input.outerHTML });
+                }
+            });
+
+            const textNodes = Array.from(doc.querySelectorAll('p, span, a, h1, h2, h3, h4, h5, h6, li, button, strong, em'));
+            textNodes.forEach(el => {
+                if (!el.innerText.trim()) return;
+                const style = window.getComputedStyle(el);
+                const color = style.color;
+                const bgColor = getBackgroundColor(el);
+                const contrast = getContrastRatio(parseColor(color), parseColor(bgColor));
+                if (contrast < 4.5) {
+                    issues.push({
+                        type: 'Contrast', check: 'Contrast', 
+                        issue: `Low contrast ratio of ${contrast.toFixed(2)}:1 found.`,
+                        details: { text: el.innerText.substring(0, 50), color, bgColor },
+                        element: el.outerHTML
+                    });
+                }
+            });
+
+            return { issues };
+        }
+
+        function getBackgroundColor(el) {
+            let current = el;
+            while(current) {
+                const style = window.getComputedStyle(current);
+                const color = style.backgroundColor;
+                if (color && color !== 'rgba(0, 0, 0, 0)') return color;
+                current = current.parentElement;
+            }
+            return 'rgb(255, 255, 255)';
+        }
+
+        function parseColor(colorStr) {
+            if (colorStr.startsWith('#')) {
+                let hex = colorStr.slice(1);
+                if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+                return [parseInt(hex.slice(0, 2), 16), parseInt(hex.slice(2, 4), 16), parseInt(hex.slice(4, 6), 16)];
+            }
+            const match = colorStr.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+            if (match) return [parseInt(match[1]), parseInt(match[2]), parseInt(match[3])];
+            return [0, 0, 0];
+        }
+
+        function getLuminance(rgb) {
+            const [r, g, b] = rgb.map(c => {
+                c /= 255;
+                return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+            });
+            return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+        }
+
+        function getContrastRatio(rgb1, rgb2) {
+            const lum1 = getLuminance(rgb1);
+            const lum2 = getLuminance(rgb2);
+            return (Math.max(lum1, lum2) + 0.05) / (Math.min(lum1, lum2) + 0.05);
+        }
+
+        // --- RENDERING LOGIC ---
+        function renderResults(report) {
+            const tabsContainer = $('#tabs');
+            const contentContainer = $('#tab-content-container');
+            if (!tabsContainer || !contentContainer) return;
+
+            tabsContainer.innerHTML = '';
+            contentContainer.innerHTML = '';
+
+            const tabs = {
+                'Overview': { icon: 'layout-dashboard', content: renderOverview(report) },
+                'Accessibility': { icon: 'person-standing', content: renderAccessibility(report.accessibility) },
+                'Performance': { icon: 'gauge-circle', content: renderPerformance(report.performance) },
+                'SEO': { icon: 'siren', content: renderSeo(report.seo) },
+                'Colors': { icon: 'palette', content: renderColors(report.colors) },
+                'Typography': { icon: 'type', content: renderTypography(report.typography) },
+                'Assets': { icon: 'image', content: renderAssets(report.assets) },
+                'Tech Stack': { icon: 'cpu', content: renderTechStack(report.techStack) },
+            };
+
+            Object.entries(tabs).forEach(([name, data], index) => {
+                const tabId = slugify(name);
+                const button = document.createElement('button');
+                button.className = `flex-shrink-0 flex items-center gap-2 px-3 py-3 text-sm font-medium border-b-2 transition-colors duration-200 ${index === 0 ? 'border-blue-400 text-blue-300' : 'border-transparent text-slate-400 hover:text-slate-200 hover:border-slate-500'}`;
+                button.innerHTML = `<i data-lucide="${data.icon}" class="w-5 h-5"></i><span>${name}</span>`;
+                button.dataset.tab = tabId;
+                tabsContainer.appendChild(button);
+
+                const contentDiv = document.createElement('div');
+                contentDiv.className = `tab-content ${index > 0 ? 'hidden' : ''}`;
+                contentDiv.id = `content-${tabId}`;
+                contentDiv.innerHTML = data.content;
+                contentContainer.appendChild(contentDiv);
+            });
+            
+            const downloadArea = $('#download-area');
+            if(downloadArea) {
+                const downloadBtn = document.createElement('button');
+                downloadBtn.className = 'w-full bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 focus-ring transition-colors duration-200';
+                downloadBtn.innerHTML = `<i data-lucide="download" class="w-5 h-5"></i><span>Download Full Report (JSON)</span>`;
+                downloadBtn.onclick = () => {
+                    const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+                    const reportUrl = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = reportUrl;
+                    a.download = `web-analyzer-report-${slugify(report.url)}.json`;
+                    a.click();
+                    URL.revokeObjectURL(reportUrl);
+                };
+                downloadArea.appendChild(downloadBtn);
+            }
+
+            lucide.createIcons();
+            addTabEventListeners();
+            addCopyEventListeners();
+            injectSvgs();
+        }
+        
+        function renderSection(title, content) {
+            if (!content || (Array.isArray(content) && content.length === 0)) {
+                return `<h3 class="text-xl font-semibold text-slate-200 mb-4">${title}</h3><p class="text-slate-400">Nothing found.</p>`;
+            }
+            return `<h3 class="text-xl font-semibold text-slate-200 mb-4">${title}</h3>${content}`;
+        }
+
+        function renderScoreCard(title, score, description) {
+            const scoreColor = score > 89 ? 'text-green-400' : score > 49 ? 'text-yellow-400' : 'text-red-400';
+            return `
+                <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
+                    <div class="flex items-baseline gap-4">
+                        <span class="text-5xl font-bold ${scoreColor}">${score}</span>
+                        <h4 class="text-xl font-semibold text-slate-200">${title}</h4>
+                    </div>
+                    <p class="text-slate-400 mt-2">${description}</p>
+                </div>
+            `;
+        }
+
+        function renderOverview(report) {
+            const accIssues = report.accessibility.issues.length;
+            const accScore = Math.max(0, 100 - accIssues * 5);
+            
+            const perfIssues = report.performance.scripts.filter(s => !s.async && !s.defer).length + report.performance.inlineStyleBlocks;
+            const perfScore = Math.max(0, 100 - perfIssues * 10);
+
+            const seoIssues = (report.seo.headings.h1?.length !== 1 ? 1 : 0) + (!report.seo.description ? 1 : 0);
+            const seoScore = Math.max(0, 100 - seoIssues * 25);
+
+            return `
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    ${renderScoreCard('Accessibility', accScore, `${accIssues} potential issues found.`)}
+                    ${renderScoreCard('Performance', perfScore, `${perfIssues} potential optimizations.`)}
+                    ${renderScoreCard('SEO', seoScore, `${seoIssues} potential issues found.`)}
+                </div>
+                <div class="mt-8 bg-slate-800/50 p-6 rounded-lg border border-slate-700">
+                    <h4 class="text-xl font-semibold text-slate-200">Analysis Summary</h4>
+                    <p class="text-slate-400 mt-2">This report provides a detailed analysis of the website's front-end. Use the tabs to explore specific areas like accessibility, performance, and SEO in more detail.</p>
+                </div>
+            `;
+        }
+
+        function renderAccessibility(accessibility) {
+            if (accessibility.issues.length === 0) {
+                return `<div class="flex items-center gap-3 bg-green-500/10 text-green-300 p-4 rounded-lg"><i data-lucide="check-circle-2" class="w-8 h-8"></i><p>No basic accessibility issues found. Great job!</p></div>`;
+            }
+            const renderIssue = issue => {
+                const colors = { Warning: 'border-yellow-400 bg-yellow-500/10 text-yellow-300', Contrast: 'border-orange-400 bg-orange-500/10 text-orange-300' };
+                const detailsHtml = issue.details ? `<div class="mt-2 text-sm flex flex-wrap items-center gap-x-4 gap-y-2"><span>Text: "${issue.details.text}..."</span><div class="flex items-center gap-2">Color: <span class="w-4 h-4 rounded border border-slate-500" style="background:${issue.details.color}"></span> ${issue.details.color}</div><div class="flex items-center gap-2">BG: <span class="w-4 h-4 rounded border border-slate-500" style="background:${issue.details.bgColor}"></span> ${issue.details.bgColor}</div></div>` : '';
+                return `<div class="border-l-4 p-4 rounded-r-lg ${colors[issue.type]}">
+                            <p class="font-semibold">${issue.check}: ${issue.issue}</p>
+                            ${detailsHtml}
+                            <code class="text-xs text-slate-400/80 mt-2 block bg-black/20 p-2 rounded break-words overflow-x-auto">${issue.element.replace(/</g, '&lt;')}</code>
+                        </div>`;
+            }
+            return `<div class="space-y-4">${accessibility.issues.map(renderIssue).join('')}</div>`;
+        }
+
+        function renderPerformance(perf) {
+            const scriptsHtml = perf.scripts.map(s => `
+                <li class="flex items-center gap-2 text-sm">
+                    <i data-lucide="${s.async || s.defer ? 'check-circle' : 'x-circle'}" class="w-4 h-4 ${s.async || s.defer ? 'text-green-400' : 'text-red-400'}"></i>
+                    <span class="font-mono truncate flex-1 min-w-0" title="${s.src}">${s.src.split('/').pop()}</span>
+                    ${s.async ? '<span class="text-xs bg-sky-500/20 text-sky-300 px-2 py-0.5 rounded-full">async</span>' : ''}
+                    ${s.defer ? '<span class="text-xs bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded-full">defer</span>' : ''}
+                </li>`).join('');
+            return `
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
+                        ${renderSection('Resource Requests', `
+                            <ul class="space-y-2">
+                                <li class="flex justify-between"><span>JavaScript Files:</span><span class="font-bold">${perf.requestCounts.totalJS}</span></li>
+                                <li class="flex justify-between"><span>CSS Files:</span><span class="font-bold">${perf.requestCounts.totalCSS}</span></li>
+                                <li class="flex justify-between"><span>Inline Style Blocks:</span><span class="font-bold">${perf.inlineStyleBlocks}</span></li>
+                                <li class="flex justify-between"><span>HTML Size:</span><span class="font-bold">${perf.htmlSize.formatted}</span></li>
+                            </ul>
+                        `)}
+                    </div>
+                    <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
+                        ${renderSection('Script Loading', `<ul class="space-y-3">${scriptsHtml}</ul>`)}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderSeo(seo) {
+            const h1Count = seo.headings.h1?.length || 0;
+            const h1Color = h1Count === 1 ? 'text-green-400' : 'text-red-400';
+            const headingsHtml = Object.entries(seo.headings).map(([tag, list]) => list.length > 0 ? `
+                <div class="mt-2"><h4 class="font-semibold text-slate-300">${tag.toUpperCase()} (${list.length})</h4><ul class="list-disc list-inside pl-2 text-slate-400 text-sm break-words">${list.map(h => `<li>${h}</li>`).join('')}</ul></div>` : '').join('');
+            
+            const renderRow = (label, value, status) => {
+                const statusColor = status === 'good' ? 'text-green-400' : status === 'bad' ? 'text-red-400' : 'text-slate-400';
+                return `<div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4"><dt class="text-sm font-medium text-slate-400">${label}</dt><dd class="mt-1 text-sm sm:mt-0 sm:col-span-2 ${statusColor} break-words">${value || 'Not found'}</dd></div>`;
+            }
+
+            return `
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
+                        ${renderSection('Meta Tags', `
+                            <dl class="divide-y divide-slate-700">
+                                ${renderRow('Title Tag', seo.title, seo.title ? 'good' : 'bad')}
+                                ${renderRow('Meta Description', seo.description, seo.description ? 'good' : 'bad')}
+                                ${renderRow('Open Graph Title', seo.ogTitle)}
+                                ${renderRow('Open Graph Description', seo.ogDescription)}
+                            </dl>
+                        `)}
+                    </div>
+                    <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
+                        ${renderSection('Heading Structure', `<div class="flex items-center gap-2 mb-4"><i data-lucide="${h1Count === 1 ? 'check-circle' : 'x-circle'}" class="w-5 h-5 ${h1Color}"></i><span class="${h1Color}">${h1Count} &lt;h1&gt; tag${h1Count !== 1 ? 's' : ''} found.</span></div>${headingsHtml}`)}
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderColors(colors) {
+            if (colors.palette.length === 0) return '<p class="text-slate-400">No colors found in inline or embedded styles.</p>';
+            const content = `<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+                    ${colors.palette.map(color => `<div class="group">
+                            <div class="w-full h-24 rounded-lg border border-slate-700" style="background-color: ${color};"></div>
+                            <button class="copy-btn mt-2 text-sm text-slate-300 font-mono group-hover:text-blue-400 transition-colors break-all" data-copy="${color}">${color}</button>
+                        </div>`).join('')}</div>`;
+            return renderSection('Color Palette', content);
+        }
+
+        function renderTypography(typography) {
+            const families = typography.families.length > 0 ? `<ul class="space-y-2">${typography.families.map(f => `<li class="font-mono text-slate-300 bg-slate-800/50 rounded px-2 py-1 break-words">${f}</li>`).join('')}</ul>` : '<p class="text-slate-400">Not found.</p>';
+            const sizes = typography.sizes.length > 0 ? `<ul class="space-y-2">${typography.sizes.map(s => `<li class="font-mono text-slate-300 bg-slate-800/50 rounded px-2 py-1 break-words">${s}</li>`).join('')}</ul>` : '<p class="text-slate-400">Not found.</p>';
+            const weights = typography.weights.length > 0 ? `<ul class="space-y-2">${typography.weights.map(w => `<li class="font-mono text-slate-300 bg-slate-800/50 rounded px-2 py-1 break-words">${w}</li>`).join('')}</ul>` : '<p class="text-slate-400">Not found.</p>';
+            return `<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div>${renderSection('Font Families', families)}</div>
+                    <div>${renderSection('Font Sizes', sizes)}</div>
+                    <div>${renderSection('Font Weights', weights)}</div></div>`;
+        }
+
+        function renderAssets(assets) {
+            const images = assets.images.length > 0 ? `<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                    ${assets.images.map(img => `<div class="bg-slate-800/50 rounded-lg p-2">
+                            <img src="${img.src}" alt="${img.alt}" class="w-full h-32 object-contain rounded" onerror="this.parentElement.style.display='none'">
+                            <a href="${img.src}" download target="_blank" class="text-blue-400 hover:text-blue-300 text-xs mt-2 block truncate">${img.src.split('/').pop() || 'image'}</a>
+                        </div>`).join('')}</div>` : '<p class="text-slate-400">No images found.</p>';
+            const svgs = assets.svgs.length > 0 ? `<div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
+                    ${assets.svgs.map((svg, i) => `<div class="bg-slate-800/50 rounded-lg p-3 flex flex-col items-center justify-center">
+                            <div class="w-full h-24 flex items-center justify-center svg-container" data-svg-html="${btoa(svg.html)}"></div>
+                            <a href="${svg.dataUri}" download="icon-${i+1}.svg" class="text-blue-400 hover:text-blue-300 text-xs mt-2 block">Download</a>
+                        </div>`).join('')}</div>` : '<p class="text-slate-400">No inline SVGs found.</p>';
+            return `<div class="space-y-8"><div>${renderSection('Images', images)}</div><div>${renderSection('Inline SVGs', svgs)}</div></div>`;
+        }
+        
+        function renderTechStack(tech) {
+            if (tech.length === 0) return '<p class="text-slate-400">No specific technologies detected.</p>';
+            const content = `<div class="flex flex-wrap gap-4">${tech.map(t => `<span class="bg-slate-700 text-slate-200 text-sm font-medium px-3 py-1.5 rounded-full">${t}</span>`).join('')}</div>`;
+            return renderSection('Detected Technologies', content);
+        }
+
+        // --- EVENT LISTENERS & INITIALIZATION ---
+        function injectSvgs() {
+            $$('.svg-container').forEach(container => {
+                try {
+                    const svgHtml = atob(container.dataset.svgHtml);
+                    container.innerHTML = svgHtml;
+                    const svgElement = container.querySelector('svg');
+                    if (svgElement) {
+                        svgElement.querySelectorAll('script').forEach(s => s.remove());
+                        svgElement.setAttribute('width', '100%'); svgElement.setAttribute('height', '100%');
+                    }
+                } catch(e) { container.innerHTML = '<p class="text-xs text-red-400">Invalid SVG</p>'; }
+            });
+        }
+
+        function addTabEventListeners() {
+            const tabs = $$('#tabs button');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => {
+                        t.classList.remove('border-blue-400', 'text-blue-300');
+                        t.classList.add('border-transparent', 'text-slate-400', 'hover:text-slate-200', 'hover:border-slate-500');
+                    });
+                    $$('.tab-content').forEach(c => c.classList.add('hidden'));
+                    tab.classList.add('border-blue-400', 'text-blue-300');
+                    tab.classList.remove('border-transparent', 'text-slate-400', 'hover:text-slate-200', 'hover:border-slate-500');
+                    const contentElement = $(`#content-${tab.dataset.tab}`);
+                    if (contentElement) contentElement.classList.remove('hidden');
                 });
-            }
-        });
+            });
+        }
+        
+        function addCopyEventListeners() {
+            const resultsState = $('#results-state');
+            if (!resultsState) return;
+            resultsState.addEventListener('click', (e) => {
+                const copyButton = e.target.closest('.copy-btn');
+                if (copyButton) copyToClipboard(copyButton.dataset.copy, copyButton);
+            });
+        }
 
-        document.getElementById('downloadBtn')?.addEventListener('click', function() {
-            if (typeof gtag === 'function') {
-                gtag('event', 'download_styles', {
-                    'event_category': 'conversion',
-                    'event_label': document.getElementById('urlInput').value
-                });
-            }
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            const extractBtn = $('#extractBtn');
+            const urlInput = $('#urlInput');
+            if (extractBtn) extractBtn.addEventListener('click', analyzeWebsite);
+            if (urlInput) urlInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') analyzeWebsite(); });
         });
     </script>
 </body>
