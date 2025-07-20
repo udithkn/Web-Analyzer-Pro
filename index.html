@@ -3,29 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Analyzer Pro - In-Depth Website Analysis</title>
     
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="A professional tool for in-depth website analysis. Get detailed reports on performance, accessibility, SEO, color palettes, typography, assets, and technology stack.">
-    <meta name="keywords" content="website analyzer, performance audit, accessibility checker, seo audit, style extractor, tech stack detector, web design tool, color contrast checker">
+    <!-- ================== SEO OPTIMIZATION (EXPERT LEVEL) ================== -->
+
+    <!-- 1. Optimized Title Tag (Primary Keyword First, Compelling & ~60 chars) -->
+    <title>Web Analyzer Pro | Free Website Analysis & SEO Audit Tool</title>
+
+    <!-- 2. Compelling Meta Description (Action-oriented, includes keywords, ~155 chars) -->
+    <meta name="description" content="Get a free, in-depth website analysis with Web Analyzer Pro. Audit SEO, check performance, analyze accessibility, extract colors & fonts, and detect tech stacks instantly.">
+
+    <!-- 3. Focused Meta Keywords (Supports some search engines) -->
+    <meta name="keywords" content="website analyzer, seo audit tool, website analysis, performance checker, accessibility scanner, tech stack detector, color palette extractor, font finder, free seo tool">
+    
     <meta name="author" content="Gemini">
 
-    <!-- Tailwind CSS -->
+    <!-- 4. Canonical URL (Prevents duplicate content issues) -->
+    <link rel="canonical" href="https://your-domain.com/web-analyzer-pro">
+
+    <!-- 5. Open Graph / Facebook & LinkedIn SEO -->
+    <meta property="og:title" content="Web Analyzer Pro | Free Website Analysis & SEO Audit Tool">
+    <meta property="og:description" content="Instantly audit any website for SEO, performance, and accessibility issues with this free, in-depth analysis tool.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-domain.com/web-analyzer-pro">
+    <meta property="og:image" content="https://your-domain.com/og-image.png"> <!-- IMPORTANT: Create a 1200x630px image for this -->
+    <meta property="og:site_name" content="Web Analyzer Pro">
+
+    <!-- 6. Twitter Card SEO -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Web Analyzer Pro | Free Website Analysis & SEO Audit Tool">
+    <meta name="twitter:description" content="Instantly audit any website for SEO, performance, and accessibility issues with this free, in-depth analysis tool.">
+    <meta name="twitter:image" content="https://your-domain.com/twitter-image.png"> <!-- IMPORTANT: Create a 2:1 ratio image for this, e.g., 1200x600px -->
+
+    <!-- 7. Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- 8. Structured Data (Schema Markup) for Rich Snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Web Analyzer Pro",
+      "description": "A free tool for in-depth website analysis, providing detailed reports on performance, accessibility, SEO, color palettes, typography, assets, and technology stack.",
+      "applicationCategory": "DeveloperTool",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "SEO Audit",
+        "Performance Analysis",
+        "Accessibility Scanning",
+        "Color Palette Extraction",
+        "Typography Analysis",
+        "Technology Stack Detection",
+        "Asset Extraction"
+      ],
+      "url": "https://your-domain.com/web-analyzer-pro"
+    }
+    </script>
+
+    <!-- ================== END SEO OPTIMIZATION ================== -->
+
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Google Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
     <style>
-        /* Custom Styles */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0f172a; /* Slate 900 */
-            color: #f8fafc; /* Slate 50 */
-        }
+        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #f8fafc; }
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: #1e293b; }
         ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
@@ -34,30 +83,23 @@
         @keyframes spin { to { transform: rotate(360deg); } }
         .loader { animation: spin 1s linear infinite; }
         .tab-content { transition: opacity 0.3s ease-in-out; }
-        
-        /* Custom class for scrollable tabs on mobile */
-        .scrollable-tabs::-webkit-scrollbar {
-            display: none; /* Hide scrollbar for a cleaner look */
-        }
-        .scrollable-tabs {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-        }
+        .scrollable-tabs::-webkit-scrollbar { display: none; }
+        .scrollable-tabs { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="antialiased">
 
     <div class="min-h-screen flex flex-col lg:flex-row">
-        <!-- Sidebar -->
         <aside class="w-full lg:w-96 bg-slate-900/80 backdrop-blur-sm border-r border-slate-700/50 p-4 sm:p-6 lg:p-8 flex-shrink-0">
             <div class="flex items-center gap-3 mb-8">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-400"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="m10 10.5 4 4"/><path d="m10 14.5 4-4"/></svg>
+                <!-- SEO: Added alt text to the logo -->
+                <img src="favicon.png" alt="Web Analyzer Pro Logo" class="w-8 h-8">
                 <h1 class="text-2xl font-bold text-slate-100">Web Analyzer Pro</h1>
             </div>
 
             <div class="space-y-6">
                 <div>
-                    <label for="urlInput" class="text-sm font-medium text-slate-300 mb-2 block">Website URL</label>
+                    <label for="urlInput" class="text-sm font-medium text-slate-300 mb-2 block">Enter Website URL</label>
                     <div class="relative">
                         <i data-lucide="link-2" class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"></i>
                         <input type="url" id="urlInput" placeholder="https://example.com" class="w-full bg-slate-800/50 border border-slate-700 rounded-lg pl-10 pr-4 py-2.5 text-slate-100 placeholder-slate-500 focus-ring">
@@ -73,12 +115,12 @@
             <div id="download-area" class="mt-6"></div>
         </aside>
 
-        <!-- Main Content -->
         <main class="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
             <div id="initial-state" class="h-full flex flex-col items-center justify-center text-center">
                  <i data-lucide="search-code" class="w-24 h-24 text-slate-600 mb-4"></i>
-                 <h2 class="text-2xl font-bold text-slate-300">In-Depth Website Analysis</h2>
-                 <p class="text-slate-400 mt-2 max-w-md">Enter a URL for a comprehensive report on performance, accessibility, SEO, and more.</p>
+                 <!-- SEO: Optimized H1 and H2 for keywords -->
+                 <h1 class="text-3xl font-bold text-slate-200">Free Website Analysis & SEO Audit Tool</h1>
+                 <h2 class="text-slate-400 mt-2 max-w-lg font-normal">Get an instant, in-depth report on any website's performance, accessibility, on-page SEO, and more.</h2>
             </div>
 
             <div id="loading-state" class="hidden h-full flex flex-col items-center justify-center">
@@ -225,7 +267,7 @@
 
         function extractColors(doc) {
             const colors = new Set();
-            const colorRegex = /(#(?:[0-9a-f]{3,8})|(rgb|hsl)a?\([\d.,\s%]+\))/gi;
+            const colorRegex = /(#[0-9a-f]{3,8}|(rgba?|hsla?)\([^)]+\))/gi;
             doc.querySelectorAll('[style]').forEach(el => {
                 const style = el.getAttribute('style');
                 const found = style.match(colorRegex);
@@ -328,27 +370,22 @@
             };
         }
 
-        // --- ACCESSIBILITY MODULE (WITH COLOR CONTRAST) ---
         function checkAccessibility(doc) {
             const issues = [];
-            
             doc.querySelectorAll('img:not([alt])').forEach((img, i) => {
                 issues.push({ type: 'Warning', check: 'Images', issue: `Image ${i + 1} is missing an alt attribute.`, element: img.outerHTML });
             });
-
             doc.querySelectorAll('a').forEach((a, i) => {
                 if (!a.innerText.trim() && !a.querySelector('img[alt]')) {
                      issues.push({ type: 'Warning', check: 'Links', issue: `Link ${i + 1} has no discernible text.`, element: a.outerHTML });
                 }
             });
-            
             doc.querySelectorAll('input, textarea, select').forEach((input, i) => {
                 if(!input.id) return;
                 if(!doc.querySelector(`label[for="${input.id}"]`)) {
                     issues.push({ type: 'Warning', check: 'Forms', issue: `Input element (id: ${input.id}) has no associated label.`, element: input.outerHTML });
                 }
             });
-
             const textNodes = Array.from(doc.querySelectorAll('p, span, a, h1, h2, h3, h4, h5, h6, li, button, strong, em'));
             textNodes.forEach(el => {
                 if (!el.innerText.trim()) return;
@@ -365,7 +402,6 @@
                     });
                 }
             });
-
             return { issues };
         }
 
@@ -405,15 +441,12 @@
             return (Math.max(lum1, lum2) + 0.05) / (Math.min(lum1, lum2) + 0.05);
         }
 
-        // --- RENDERING LOGIC ---
         function renderResults(report) {
             const tabsContainer = $('#tabs');
             const contentContainer = $('#tab-content-container');
             if (!tabsContainer || !contentContainer) return;
-
             tabsContainer.innerHTML = '';
             contentContainer.innerHTML = '';
-
             const tabs = {
                 'Overview': { icon: 'layout-dashboard', content: renderOverview(report) },
                 'Accessibility': { icon: 'person-standing', content: renderAccessibility(report.accessibility) },
@@ -424,7 +457,6 @@
                 'Assets': { icon: 'image', content: renderAssets(report.assets) },
                 'Tech Stack': { icon: 'cpu', content: renderTechStack(report.techStack) },
             };
-
             Object.entries(tabs).forEach(([name, data], index) => {
                 const tabId = slugify(name);
                 const button = document.createElement('button');
@@ -432,14 +464,12 @@
                 button.innerHTML = `<i data-lucide="${data.icon}" class="w-5 h-5"></i><span>${name}</span>`;
                 button.dataset.tab = tabId;
                 tabsContainer.appendChild(button);
-
                 const contentDiv = document.createElement('div');
                 contentDiv.className = `tab-content ${index > 0 ? 'hidden' : ''}`;
                 contentDiv.id = `content-${tabId}`;
                 contentDiv.innerHTML = data.content;
                 contentContainer.appendChild(contentDiv);
             });
-            
             const downloadArea = $('#download-area');
             if(downloadArea) {
                 const downloadBtn = document.createElement('button');
@@ -456,7 +486,6 @@
                 };
                 downloadArea.appendChild(downloadBtn);
             }
-
             lucide.createIcons();
             addTabEventListeners();
             addCopyEventListeners();
@@ -472,29 +501,23 @@
 
         function renderScoreCard(title, score, description) {
             const scoreColor = score > 89 ? 'text-green-400' : score > 49 ? 'text-yellow-400' : 'text-red-400';
-            return `
-                <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
+            return `<div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
                     <div class="flex items-baseline gap-4">
                         <span class="text-5xl font-bold ${scoreColor}">${score}</span>
                         <h4 class="text-xl font-semibold text-slate-200">${title}</h4>
                     </div>
                     <p class="text-slate-400 mt-2">${description}</p>
-                </div>
-            `;
+                </div>`;
         }
 
         function renderOverview(report) {
             const accIssues = report.accessibility.issues.length;
             const accScore = Math.max(0, 100 - accIssues * 5);
-            
             const perfIssues = report.performance.scripts.filter(s => !s.async && !s.defer).length + report.performance.inlineStyleBlocks;
             const perfScore = Math.max(0, 100 - perfIssues * 10);
-
             const seoIssues = (report.seo.headings.h1?.length !== 1 ? 1 : 0) + (!report.seo.description ? 1 : 0);
             const seoScore = Math.max(0, 100 - seoIssues * 25);
-
-            return `
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            return `<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     ${renderScoreCard('Accessibility', accScore, `${accIssues} potential issues found.`)}
                     ${renderScoreCard('Performance', perfScore, `${perfIssues} potential optimizations.`)}
                     ${renderScoreCard('SEO', seoScore, `${seoIssues} potential issues found.`)}
@@ -502,8 +525,7 @@
                 <div class="mt-8 bg-slate-800/50 p-6 rounded-lg border border-slate-700">
                     <h4 class="text-xl font-semibold text-slate-200">Analysis Summary</h4>
                     <p class="text-slate-400 mt-2">This report provides a detailed analysis of the website's front-end. Use the tabs to explore specific areas like accessibility, performance, and SEO in more detail.</p>
-                </div>
-            `;
+                </div>`;
         }
 
         function renderAccessibility(accessibility) {
@@ -530,8 +552,7 @@
                     ${s.async ? '<span class="text-xs bg-sky-500/20 text-sky-300 px-2 py-0.5 rounded-full">async</span>' : ''}
                     ${s.defer ? '<span class="text-xs bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded-full">defer</span>' : ''}
                 </li>`).join('');
-            return `
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            return `<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
                         ${renderSection('Resource Requests', `
                             <ul class="space-y-2">
@@ -539,14 +560,12 @@
                                 <li class="flex justify-between"><span>CSS Files:</span><span class="font-bold">${perf.requestCounts.totalCSS}</span></li>
                                 <li class="flex justify-between"><span>Inline Style Blocks:</span><span class="font-bold">${perf.inlineStyleBlocks}</span></li>
                                 <li class="flex justify-between"><span>HTML Size:</span><span class="font-bold">${perf.htmlSize.formatted}</span></li>
-                            </ul>
-                        `)}
+                            </ul>`)}
                     </div>
                     <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
                         ${renderSection('Script Loading', `<ul class="space-y-3">${scriptsHtml}</ul>`)}
                     </div>
-                </div>
-            `;
+                </div>`;
         }
 
         function renderSeo(seo) {
@@ -554,14 +573,11 @@
             const h1Color = h1Count === 1 ? 'text-green-400' : 'text-red-400';
             const headingsHtml = Object.entries(seo.headings).map(([tag, list]) => list.length > 0 ? `
                 <div class="mt-2"><h4 class="font-semibold text-slate-300">${tag.toUpperCase()} (${list.length})</h4><ul class="list-disc list-inside pl-2 text-slate-400 text-sm break-words">${list.map(h => `<li>${h}</li>`).join('')}</ul></div>` : '').join('');
-            
             const renderRow = (label, value, status) => {
                 const statusColor = status === 'good' ? 'text-green-400' : status === 'bad' ? 'text-red-400' : 'text-slate-400';
                 return `<div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4"><dt class="text-sm font-medium text-slate-400">${label}</dt><dd class="mt-1 text-sm sm:mt-0 sm:col-span-2 ${statusColor} break-words">${value || 'Not found'}</dd></div>`;
             }
-
-            return `
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            return `<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
                         ${renderSection('Meta Tags', `
                             <dl class="divide-y divide-slate-700">
@@ -569,14 +585,12 @@
                                 ${renderRow('Meta Description', seo.description, seo.description ? 'good' : 'bad')}
                                 ${renderRow('Open Graph Title', seo.ogTitle)}
                                 ${renderRow('Open Graph Description', seo.ogDescription)}
-                            </dl>
-                        `)}
+                            </dl>`)}
                     </div>
                     <div class="bg-slate-800/50 p-6 rounded-lg border border-slate-700">
                         ${renderSection('Heading Structure', `<div class="flex items-center gap-2 mb-4"><i data-lucide="${h1Count === 1 ? 'check-circle' : 'x-circle'}" class="w-5 h-5 ${h1Color}"></i><span class="${h1Color}">${h1Count} &lt;h1&gt; tag${h1Count !== 1 ? 's' : ''} found.</span></div>${headingsHtml}`)}
                     </div>
-                </div>
-            `;
+                </div>`;
         }
         
         function renderColors(colors) {
@@ -619,7 +633,6 @@
             return renderSection('Detected Technologies', content);
         }
 
-        // --- EVENT LISTENERS & INITIALIZATION ---
         function injectSvgs() {
             $$('.svg-container').forEach(container => {
                 try {
