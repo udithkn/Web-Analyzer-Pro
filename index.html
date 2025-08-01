@@ -5,43 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- ================== SEO OPTIMIZATION (ENHANCED) ================== -->
-
-    <!-- 1. Optimized Title Tag (Emphasizes "Free", ~60 chars) -->
-    <title>Web Analyzer Pro | 100% Free Website Analysis &amp; SEO Tool</title>
-
-    <!-- 2. Compelling Meta Description (Action-oriented, highlights "Free", "Instant", ~160 chars) -->
+    <title>Web Analyzer Pro | 100% Free Website Analysis & SEO Tool</title>
     <meta name="description" content="Get a 100% free, instant, and in-depth website analysis with Web Analyzer Pro. Audit SEO, performance, accessibility, and more. No sign-up required.">
-
-    <!-- 3. Crawler Instructions -->
     <meta name="robots" content="index, follow">
-
-    <!-- 4. Focused Meta Keywords (Supports some search engines) -->
     <meta name="keywords" content="free website analyzer, free seo audit tool, website analysis, seo checker, performance checker, accessibility scanner, tech stack detector, color palette extractor, font finder, free seo tool">
-    
     <meta name="author" content="Gemini">
-
-    <!-- 5. Canonical URL (Prevents duplicate content issues) -->
     <link rel="canonical" href="https://udithkn.github.io/Web-Analyzer-Pro/">
-
-    <!-- 6. Open Graph / Facebook & LinkedIn SEO -->
     <meta property="og:title" content="Web Analyzer Pro | 100% Free Website Analysis &amp; SEO Tool">
     <meta property="og:description" content="Instantly audit any website for SEO, performance, and accessibility issues with this 100% free, in-depth analysis tool.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://udithkn.github.io/Web-Analyzer-Pro/">
-    <meta property="og:image" content="https://udithkn.github.io/Web-Analyzer-Pro/og-image.png"> <!-- IMPORTANT: Create a 1200x630px image named 'og-image.png' -->
+    <meta property="og:image" content="https://udithkn.github.io/Web-Analyzer-Pro/og-image.png">
     <meta property="og:site_name" content="Web Analyzer Pro">
-
-    <!-- 7. Twitter Card SEO -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Web Analyzer Pro | 100% Free Website Analysis &amp; SEO Tool">
     <meta name="twitter:description" content="Instantly audit any website for SEO, performance, and accessibility issues with this 100% free, in-depth analysis tool.">
-    <meta name="twitter:image" content="https://udithkn.github.io/Web-Analyzer-Pro/twitter-image.png"> <!-- IMPORTANT: Create a 2:1 ratio image named 'twitter-image.png' -->
-
-    <!-- 8. Favicon -->
+    <meta name="twitter:image" content="https://udithkn.github.io/Web-Analyzer-Pro/twitter-image.png">
     <link rel="icon" type="image/png" href="favicon.png">
-
-    <!-- 9. Enhanced Structured Data (Schema Markup for Rich Snippets & AI) -->
-    <!-- This tells search engines exactly what your tool is, who it's for, and that it's completely free. -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -50,42 +30,25 @@
       "description": "A 100% free tool for in-depth website analysis, providing instant reports on performance, accessibility, SEO, color palettes, typography, assets, and the technology stack of any website. No sign-up required for anyone to use.",
       "applicationCategory": "DeveloperTool",
       "operatingSystem": "Any (Web-based)",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "provider": {
-        "@type": "Organization",
-        "name": "Web Analyzer Pro"
-      },
-      "audience": {
-        "@type": "Audience",
-        "audienceType": ["Web Developers", "SEO Specialists", "Digital Marketers", "Web Designers", "Students"]
-      },
-      "featureList": [
-        "Free On-Page SEO Audit",
-        "Website Performance Analysis",
-        "Accessibility Scanning (WCAG)",
-        "Color Palette Extraction",
-        "Typography Analysis",
-        "Technology Stack Detection",
-        "Image & Asset Extraction"
-      ],
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "provider": { "@type": "Organization", "name": "Web Analyzer Pro" },
+      "audience": { "@type": "Audience", "audienceType": ["Web Developers", "SEO Specialists", "Digital Marketers", "Web Designers", "Students"] },
+      "featureList": ["Free On-Page SEO Audit", "Website Performance Analysis", "Accessibility Scanning (WCAG)", "Color Palette Extraction", "Typography Analysis", "Technology Stack Detection", "Image & Asset Extraction"],
       "url": "https://udithkn.github.io/Web-Analyzer-Pro/",
       "screenshot": "https://udithkn.github.io/Web-Analyzer-Pro/screenshot.jpg"
     }
     </script>
-
     <!-- ================== END SEO OPTIMIZATION ================== -->
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <!-- Charting Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-
+    
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #f8fafc; }
         ::-webkit-scrollbar { width: 8px; height: 8px; }
@@ -93,53 +56,95 @@
         ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #64748b; }
         .focus-ring:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.6); }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .loader { animation: spin 1s linear infinite; }
-        .tab-content { transition: opacity 0.3s ease-in-out; }
         .scrollable-tabs::-webkit-scrollbar { display: none; }
         .scrollable-tabs { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Animations */
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loader { animation: spin 1s linear infinite; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .fade-in { animation: fadeIn 0.5s ease-in-out forwards; }
+
+        @keyframes slide-up { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .slide-up { animation: slide-up 0.5s ease-out forwards; }
+
+        .animated-card { opacity: 0; } /* Start hidden */
+        
+        @keyframes shake {
+          10%, 90% { transform: translate3d(-1px, 0, 0) rotate(-3deg); }
+          20%, 80% { transform: translate3d(2px, 0, 0) rotate(3deg); }
+          30%, 50%, 70% { transform: translate3d(-3px, 0, 0) rotate(-3deg); }
+          40%, 60% { transform: translate3d(3px, 0, 0) rotate(3deg); }
+        }
+        .animate-shake {
+          animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+        }
     </style>
 </head>
 <body class="antialiased">
 
     <div class="min-h-screen flex flex-col lg:flex-row">
-        <aside class="w-full lg:w-96 bg-slate-900/80 backdrop-blur-sm border-r border-slate-700/50 p-4 sm:p-6 lg:p-8 flex-shrink-0">
-            <div class="flex items-center gap-3 mb-8">
-                <!-- SEO: Added alt text to the logo -->
-                <img src="favicon.png" alt="Web Analyzer Pro Logo" class="w-8 h-8">
-                <h1 class="text-2xl font-bold text-slate-100">Web Analyzer Pro</h1>
-            </div>
-
-            <div class="space-y-6">
-                <div>
-                    <label for="urlInput" class="text-sm font-medium text-slate-300 mb-2 block">Enter Website URL</label>
-                    <div class="relative">
-                        <i data-lucide="link-2" class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"></i>
-                        <input type="url" id="urlInput" placeholder="https://example.com" class="w-full bg-slate-800/50 border border-slate-700 rounded-lg pl-10 pr-4 py-2.5 text-slate-100 placeholder-slate-500 focus-ring">
-                    </div>
+        <aside class="w-full lg:w-96 bg-slate-900/80 backdrop-blur-sm border-r border-slate-700/50 p-4 sm:p-6 lg:p-8 flex-shrink-0 flex flex-col">
+            <div>
+                <div class="flex items-center gap-3 mb-8">
+                    <img src="favicon.png" alt="Web Analyzer Pro Logo" class="w-8 h-8">
+                    <h1 class="text-2xl font-bold text-slate-100">Web Analyzer Pro</h1>
                 </div>
-                <button id="extractBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center gap-2 focus-ring transition-colors duration-200">
-                    <i data-lucide="wand-2" class="w-5 h-5"></i>
-                    <span>Analyze Website</span>
-                </button>
+
+                <div class="space-y-6">
+                    <div>
+                        <label for="urlInput" class="text-sm font-medium text-slate-300 mb-2 block">Enter Website URL</label>
+                        <div class="relative">
+                            <i data-lucide="link-2" class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400"></i>
+                            <input type="url" id="urlInput" placeholder="https://example.com" class="w-full bg-slate-800/50 border border-slate-700 rounded-lg pl-10 pr-4 py-2.5 text-slate-100 placeholder-slate-500 focus-ring">
+                        </div>
+                    </div>
+                    <button id="analyzeBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center gap-2 focus-ring transition-colors duration-200">
+                        <i data-lucide="wand-2" class="w-5 h-5"></i>
+                        <span>Analyze Website</span>
+                    </button>
+                </div>
+                
+                <div id="message-area" class="mt-6"></div>
+                <div id="download-area" class="mt-4 space-y-2"></div>
+                
+                <!-- Analysis History Section -->
+                <div id="history-section" class="mt-8">
+                    <h2 class="text-lg font-semibold text-slate-200 mb-3">Recent Analyses</h2>
+                    <ul id="history-list" class="space-y-2">
+                        <!-- History items will be injected here -->
+                    </ul>
+                </div>
             </div>
             
-            <div id="message-area" class="mt-6"></div>
-            <div id="download-area" class="mt-6"></div>
+            <footer class="mt-auto pt-8 text-center text-xs text-slate-500">
+                <p>&copy; <span id="copyright-year"></span> Udith Babu K N. All Rights Reserved.</p>
+            </footer>
         </aside>
 
         <main class="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto">
             <div id="initial-state" class="h-full flex flex-col items-center justify-center text-center">
                  <i data-lucide="search-code" class="w-24 h-24 text-slate-600 mb-4"></i>
-                 <!-- SEO: Optimized H1 and H2 for keywords -->
                  <h1 class="text-3xl font-bold text-slate-200">Free Website Analysis &amp; SEO Audit Tool</h1>
                  <h2 class="text-slate-400 mt-2 max-w-lg font-normal">Get an instant, in-depth report on any website's performance, accessibility, on-page SEO, and more.</h2>
+                 <!-- Example URLs -->
+                 <div class="mt-6">
+                    <p class="text-slate-500 text-sm mb-2">Or try one of these:</p>
+                    <div class="flex gap-2 justify-center">
+                        <button class="example-url-btn bg-slate-700/50 hover:bg-slate-700 text-slate-300 px-3 py-1 rounded-full text-sm transition-colors">google.com</button>
+                        <button class="example-url-btn bg-slate-700/50 hover:bg-slate-700 text-slate-300 px-3 py-1 rounded-full text-sm transition-colors">github.com</button>
+                    </div>
+                 </div>
             </div>
 
             <div id="loading-state" class="hidden h-full flex flex-col items-center justify-center">
                 <i data-lucide="loader-2" class="w-16 h-16 text-blue-400 loader"></i>
                 <p class="text-slate-300 mt-4 text-lg">Performing deep analysis...</p>
-                <p id="loading-status" class="text-slate-500 mt-1 text-sm">Fetching website content...</p>
+                <div class="w-full max-w-md bg-slate-700 rounded-full h-2.5 mt-4 overflow-hidden">
+                    <div id="progress-bar" class="bg-blue-500 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+                </div>
+                <p id="loading-status" class="text-slate-500 mt-2 text-sm">Initializing...</p>
             </div>
 
             <div id="results-state" class="hidden">
@@ -163,31 +168,17 @@
         }
 
         async function fetchWithProxy(url) {
-            const proxies = [
-                `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-                `https://corsproxy.io/?${encodeURIComponent(url)}`,
-                `https://thingproxy.freeboard.io/fetch/${url}`
-            ];
-            for (const proxyUrl of proxies) {
-                const proxyName = new URL(proxyUrl).hostname;
-                try {
-                    console.log(`Attempting to fetch via ${proxyName}...`);
-                    const response = await fetch(proxyUrl);
-                    if (!response.ok) {
-                        console.warn(`Proxy ${proxyName} failed with status: ${response.status}`);
-                        continue;
-                    }
-                    const data = await response.text();
-                    if (data && !data.includes("The service is temporarily unavailable")) {
-                        console.log(`Successfully fetched using ${proxyName}`);
-                        return data;
-                    }
-                     console.warn(`Proxy ${proxyName} returned an empty or error response.`);
-                } catch (error) { 
-                    console.warn(`Fetch attempt with ${proxyName} failed:`, error);
-                }
+            const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+            try {
+                const response = await fetch(proxyUrl, { signal: AbortSignal.timeout(15000) });
+                if (!response.ok) throw new Error(`Request failed with status: ${response.status}`);
+                const data = await response.text();
+                if (!data || data.includes("The service is temporarily unavailable")) throw new Error("Proxy service returned an error.");
+                return data;
+            } catch (error) {
+                console.error('Fetch failed:', error);
+                throw new Error("We couldn't analyze that URL. This can happen if the site is offline, has strong anti-bot protection, or the request timed out. Please try another site.");
             }
-            throw new Error(`Could not fetch content for ${url}. All proxies failed, the site may be down, or it's blocking requests. Please try a different URL.`);
         }
 
         function copyToClipboard(text, element) {
@@ -207,77 +198,141 @@
         
         function showMessage(message, type = 'error') {
             const messageArea = $('#message-area');
-            if (!messageArea) return;
             const colors = {
                 error: 'bg-red-500/10 border-red-500/30 text-red-400',
                 warning: 'bg-yellow-500/10 border-yellow-500/30 text-yellow-400',
+                retry: 'bg-blue-500/10 border-blue-500/30 text-blue-300'
             };
-            messageArea.innerHTML = `<div class="p-4 rounded-lg border ${colors[type]}"><p class="text-sm">${message}</p></div>`;
+            
+            let iconHtml = '';
+            let animationClass = '';
+            if (type === 'retry') {
+                iconHtml = '<i data-lucide="refresh-cw" class="w-8 h-8 mr-4 flex-shrink-0"></i>';
+                animationClass = 'animate-shake';
+            }
+
+            messageArea.innerHTML = `
+                <div class="p-4 rounded-lg border ${colors[type]} flex items-center ${animationClass}">
+                    ${iconHtml}
+                    <p class="text-sm">${message}</p>
+                </div>`;
+            
+            if (type === 'retry') {
+                lucide.createIcons();
+            }
         }
         
-        function updateLoadingStatus(text) {
-            const statusEl = $('#loading-status');
-            if (statusEl) statusEl.textContent = text;
+        function updateLoadingStatus(text, progress) {
+            $('#loading-status').textContent = text;
+            $('#progress-bar').style.width = `${progress}%`;
+        }
+
+        // --- ANALYSIS HISTORY ---
+        function getHistory() {
+            return JSON.parse(localStorage.getItem('analysisHistory') || '[]');
+        }
+
+        function saveToHistory(url) {
+            let history = getHistory();
+            const cleanUrl = url.replace(/^https?:\/\//, '');
+            history = history.filter(item => item !== cleanUrl);
+            history.unshift(cleanUrl);
+            localStorage.setItem('analysisHistory', JSON.stringify(history.slice(0, 5)));
+            renderHistory();
+        }
+
+        function renderHistory() {
+            const history = getHistory();
+            const list = $('#history-list');
+            if (!list) return;
+            if (history.length === 0) {
+                list.innerHTML = `<li class="text-slate-500 text-sm">No recent analyses.</li>`;
+                return;
+            }
+            list.innerHTML = history.map(url => `
+                <li class="flex items-center justify-between group">
+                    <a href="#" class="history-item-link text-slate-400 hover:text-blue-400 text-sm truncate" data-url="${url}">${url}</a>
+                    <button class="remove-history-item opacity-0 group-hover:opacity-100 transition-opacity" data-url="${url}">
+                        <i data-lucide="x" class="w-4 h-4 text-slate-500 hover:text-red-400"></i>
+                    </button>
+                </li>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function removeFromHistory(url) {
+             let history = getHistory();
+             history = history.filter(item => item !== url);
+             localStorage.setItem('analysisHistory', JSON.stringify(history));
+             renderHistory();
         }
 
         // --- CORE ANALYSIS LOGIC ---
-        async function analyzeWebsite() {
-            const urlInput = $('#urlInput');
-            if (!urlInput) return;
-            const url = urlInput.value.trim();
-            if (!url || !url.match(/^https?:\/\//)) {
-                showMessage('Please enter a valid URL starting with http:// or https://.');
+        async function analyzeWebsite(urlToAnalyze) {
+            const url = urlToAnalyze || $('#urlInput').value.trim();
+            if (!url) {
+                showMessage('Please enter a website URL.');
                 return;
             }
+            const fullUrl = url.match(/^https?:\/\//) ? url : `https://${url}`;
+            $('#urlInput').value = fullUrl;
 
             $('#message-area').innerHTML = '';
             $('#download-area').innerHTML = '';
-            $('#initial-state')?.classList.add('hidden');
-            $('#results-state')?.classList.add('hidden');
-            $('#loading-state')?.classList.remove('hidden');
+            $('#initial-state').classList.add('hidden');
+            $('#results-state').classList.add('hidden');
+            $('#loading-state').classList.remove('hidden');
 
             try {
-                updateLoadingStatus('Fetching website content...');
-                const html = await fetchWithProxy(url);
+                updateLoadingStatus('Fetching website content...', 10);
+                const html = await fetchWithProxy(fullUrl);
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(html, 'text/html');
-                const baseURL = new URL(url).origin;
+                const baseURL = new URL(fullUrl).origin;
 
-                updateLoadingStatus('Analyzing styles and assets...');
+                updateLoadingStatus('Analyzing styles and assets...', 30);
                 const colors = extractColors(doc);
                 const typography = extractTypography(doc);
                 const assets = extractAssets(doc, baseURL);
 
-                updateLoadingStatus('Detecting technology stack...');
+                updateLoadingStatus('Detecting technology stack...', 50);
                 const techStack = detectTechStack(doc, html);
 
-                updateLoadingStatus('Auditing SEO and headings...');
+                updateLoadingStatus('Auditing SEO and headings...', 70);
                 const seo = extractSeoData(doc);
                 
-                updateLoadingStatus('Scanning for accessibility issues...');
+                updateLoadingStatus('Scanning for accessibility issues...', 85);
                 const accessibility = checkAccessibility(doc);
                 
-                updateLoadingStatus('Checking performance metrics...');
+                updateLoadingStatus('Checking performance metrics...', 95);
                 const performance = checkPerformance(doc, html);
 
-                const fullReport = { url, generatedAt: new Date().toISOString(), colors, typography, assets, techStack, seo, accessibility, performance };
+                const fullReport = { url: fullUrl, generatedAt: new Date().toISOString(), colors, typography, assets, techStack, seo, accessibility, performance };
                 
-                updateLoadingStatus('Generating report...');
+                updateLoadingStatus('Generating report...', 100);
                 renderResults(fullReport);
+                saveToHistory(fullUrl);
 
-                $('#loading-state')?.classList.add('hidden');
-                $('#results-state')?.classList.remove('hidden');
+                $('#loading-state').classList.add('hidden');
+                $('#results-state').classList.remove('hidden');
 
             } catch (error) {
                 console.error('Analysis failed:', error);
-                showMessage(error.message);
-                $('#loading-state')?.classList.add('hidden');
-                $('#initial-state')?.classList.remove('hidden');
+                if (error.message.startsWith("We couldn't analyze")) {
+                     showMessage(
+                        `${error.message}<br><br><strong>Tip:</strong> Sometimes it takes 2-3 tries. Give it another go!`,
+                        'retry'
+                    );
+                } else {
+                    showMessage(error.message);
+                }
+                $('#loading-state').classList.add('hidden');
+                $('#initial-state').classList.remove('hidden');
+                updateLoadingStatus('Idle', 0);
             }
         }
         
-        // --- IN-DEPTH EXTRACTION & ANALYSIS MODULES ---
-
+        // --- EXTRACTION & ANALYSIS MODULES ---
         function extractColors(doc) {
             const colors = new Set();
             const colorRegex = /(#[0-9a-f]{3,8}|(rgba?|hsla?)\([^)]+\))/gi;
@@ -370,25 +425,17 @@
             const stylesheets = Array.from(doc.querySelectorAll('link[rel="stylesheet"]'));
             const inlineStyles = Array.from(doc.querySelectorAll('style'));
             return {
-                requestCounts: {
-                    totalJS: scripts.length,
-                    totalCSS: stylesheets.length,
-                },
+                requestCounts: { totalJS: scripts.length, totalCSS: stylesheets.length },
                 scripts: scripts.map(s => ({ src: s.src, async: s.async, defer: s.defer })),
                 inlineStyleBlocks: inlineStyles.length,
-                htmlSize: {
-                    raw: html.length,
-                    formatted: `${(html.length / 1024).toFixed(2)} KB`
-                }
+                htmlSize: { raw: html.length, formatted: `${(html.length / 1024).toFixed(2)} KB` }
             };
         }
 
         function checkAccessibility(doc) {
             const issues = [];
-            doc.querySelectorAll('img:not([alt])').forEach((img, i) => {
-                issues.push({ type: 'Warning', check: 'Images', issue: `Image ${i + 1} is missing an alt attribute.`, element: img.outerHTML });
-            });
-            doc.querySelectorAll('a').forEach((a, i) => {
+            doc.querySelectorAll('img:not([alt])').forEach((img, i) => issues.push({ type: 'Warning', check: 'Images', issue: `Image ${i + 1} is missing an alt attribute.`, element: img.outerHTML }));
+            doc.querySelectorAll('a:not([aria-label]):not([aria-labelledby])').forEach((a, i) => {
                 if (!a.innerText.trim() && !a.querySelector('img[alt]')) {
                      issues.push({ type: 'Warning', check: 'Links', issue: `Link ${i + 1} has no discernible text.`, element: a.outerHTML });
                 }
@@ -399,67 +446,16 @@
                     issues.push({ type: 'Warning', check: 'Forms', issue: `Input element (id: ${input.id}) has no associated label.`, element: input.outerHTML });
                 }
             });
-            const textNodes = Array.from(doc.querySelectorAll('p, span, a, h1, h2, h3, h4, h5, h6, li, button, strong, em'));
-            textNodes.forEach(el => {
-                if (!el.innerText.trim()) return;
-                const style = window.getComputedStyle(el);
-                const color = style.color;
-                const bgColor = getBackgroundColor(el);
-                const contrast = getContrastRatio(parseColor(color), parseColor(bgColor));
-                if (contrast < 4.5) {
-                    issues.push({
-                        type: 'Contrast', check: 'Contrast', 
-                        issue: `Low contrast ratio of ${contrast.toFixed(2)}:1 found.`,
-                        details: { text: el.innerText.substring(0, 50), color, bgColor },
-                        element: el.outerHTML
-                    });
-                }
-            });
             return { issues };
         }
 
-        function getBackgroundColor(el) {
-            let current = el;
-            while(current) {
-                const style = window.getComputedStyle(current);
-                const color = style.backgroundColor;
-                if (color && color !== 'rgba(0, 0, 0, 0)') return color;
-                current = current.parentElement;
-            }
-            return 'rgb(255, 255, 255)';
-        }
-
-        function parseColor(colorStr) {
-            if (colorStr.startsWith('#')) {
-                let hex = colorStr.slice(1);
-                if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
-                return [parseInt(hex.slice(0, 2), 16), parseInt(hex.slice(2, 4), 16), parseInt(hex.slice(4, 6), 16)];
-            }
-            const match = colorStr.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
-            if (match) return [parseInt(match[1]), parseInt(match[2]), parseInt(match[3])];
-            return [0, 0, 0];
-        }
-
-        function getLuminance(rgb) {
-            const [r, g, b] = rgb.map(c => {
-                c /= 255;
-                return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
-            });
-            return 0.2126 * r + 0.7152 * g + 0.0722 * b;
-        }
-
-        function getContrastRatio(rgb1, rgb2) {
-            const lum1 = getLuminance(rgb1);
-            const lum2 = getLuminance(rgb2);
-            return (Math.max(lum1, lum2) + 0.05) / (Math.min(lum1, lum2) + 0.05);
-        }
-
+        // --- REPORT RENDERING ---
         function renderResults(report) {
             const tabsContainer = $('#tabs');
             const contentContainer = $('#tab-content-container');
-            if (!tabsContainer || !contentContainer) return;
             tabsContainer.innerHTML = '';
             contentContainer.innerHTML = '';
+            
             const tabs = {
                 'Overview': { icon: 'layout-dashboard', content: renderOverview(report) },
                 'Accessibility': { icon: 'person-standing', content: renderAccessibility(report.accessibility) },
@@ -470,6 +466,7 @@
                 'Assets': { icon: 'image', content: renderAssets(report.assets) },
                 'Tech Stack': { icon: 'cpu', content: renderTechStack(report.techStack) },
             };
+
             Object.entries(tabs).forEach(([name, data], index) => {
                 const tabId = slugify(name);
                 const button = document.createElement('button');
@@ -477,32 +474,27 @@
                 button.innerHTML = `<i data-lucide="${data.icon}" class="w-5 h-5"></i><span>${name}</span>`;
                 button.dataset.tab = tabId;
                 tabsContainer.appendChild(button);
+
                 const contentDiv = document.createElement('div');
-                contentDiv.className = `tab-content ${index > 0 ? 'hidden' : ''}`;
+                contentDiv.className = `tab-content fade-in ${index > 0 ? 'hidden' : ''}`;
                 contentDiv.id = `content-${tabId}`;
                 contentDiv.innerHTML = data.content;
                 contentContainer.appendChild(contentDiv);
             });
-            const downloadArea = $('#download-area');
-            if(downloadArea) {
-                const downloadBtn = document.createElement('button');
-                downloadBtn.className = 'w-full bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 focus-ring transition-colors duration-200';
-                downloadBtn.innerHTML = `<i data-lucide="download" class="w-5 h-5"></i><span>Download Full Report (JSON)</span>`;
-                downloadBtn.onclick = () => {
-                    const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
-                    const reportUrl = URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = reportUrl;
-                    a.download = `web-analyzer-report-${slugify(report.url)}.json`;
-                    a.click();
-                    URL.revokeObjectURL(reportUrl);
-                };
-                downloadArea.appendChild(downloadBtn);
+            
+            if (tabs.Overview) {
+                renderHealthChart(report);
             }
+
+            renderActionButtons(report);
             lucide.createIcons();
             addTabEventListeners();
             addCopyEventListeners();
             injectSvgs();
+            
+            $$('#results-state .animated-card').forEach((card, i) => {
+                setTimeout(() => card.classList.add('slide-up'), i * 100);
+            });
         }
         
         function renderSection(title, content) {
@@ -530,15 +522,65 @@
             const perfScore = Math.max(0, 100 - perfIssues * 10);
             const seoIssues = (report.seo.headings.h1?.length !== 1 ? 1 : 0) + (!report.seo.description ? 1 : 0);
             const seoScore = Math.max(0, 100 - seoIssues * 25);
-            return `<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    ${renderScoreCard('Accessibility', accScore, `${accIssues} potential issues found.`)}
-                    ${renderScoreCard('Performance', perfScore, `${perfIssues} potential optimizations.`)}
-                    ${renderScoreCard('SEO', seoScore, `${seoIssues} potential issues found.`)}
-                </div>
-                <div class="mt-8 bg-slate-800/50 p-6 rounded-lg border border-slate-700">
-                    <h4 class="text-xl font-semibold text-slate-200">Analysis Summary</h4>
-                    <p class="text-slate-400 mt-2">This report provides a detailed analysis of the website's front-end. Use the tabs to explore specific areas like accessibility, performance, and SEO in more detail.</p>
-                </div>`;
+            
+            return `<div class="grid grid-cols-1 lg:grid-cols-5 gap-8 animated-card">
+                        <div class="lg:col-span-3 bg-slate-800/50 p-6 rounded-lg border border-slate-700">
+                            <h3 class="text-xl font-semibold text-slate-200 mb-4">Website Health</h3>
+                            <div class="h-80 w-full"><canvas id="healthChart"></canvas></div>
+                        </div>
+                        <div class="lg:col-span-2 space-y-6">
+                            ${renderScoreCard('Accessibility', accScore, `${accIssues} issues found.`)}
+                            ${renderScoreCard('Performance', perfScore, `${perfIssues} optimizations.`)}
+                            ${renderScoreCard('SEO', seoScore, `${seoIssues} issues found.`)}
+                        </div>
+                    </div>`;
+        }
+        
+        function renderHealthChart(report) {
+            const ctx = $('#healthChart')?.getContext('2d');
+            if (!ctx) return;
+
+            const accScore = Math.max(0, 100 - report.accessibility.issues.length * 5);
+            const perfScore = Math.max(0, 100 - (report.performance.scripts.filter(s => !s.async && !s.defer).length + report.performance.inlineStyleBlocks) * 10);
+            const seoScore = Math.max(0, 100 - ((report.seo.headings.h1?.length !== 1 ? 1 : 0) + (!report.seo.description ? 1 : 0)) * 25);
+
+            new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Accessibility', 'Performance', 'SEO'],
+                    datasets: [{
+                        label: 'Health Score',
+                        data: [accScore, perfScore, seoScore],
+                        fill: true,
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgb(59, 130, 246)',
+                        pointBackgroundColor: 'rgb(59, 130, 246)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(59, 130, 246)'
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(255, 255, 255, 0.2)' },
+                            grid: { color: 'rgba(255, 255, 255, 0.2)' },
+                            pointLabels: { color: '#f8fafc', font: { size: 14 } },
+                            ticks: {
+                                color: '#94a3b8',
+                                backdropColor: 'rgba(0,0,0,0)',
+                                stepSize: 25
+                            },
+                            min: 0,
+                            max: 100
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
         }
 
         function renderAccessibility(accessibility) {
@@ -546,11 +588,9 @@
                 return `<div class="flex items-center gap-3 bg-green-500/10 text-green-300 p-4 rounded-lg"><i data-lucide="check-circle-2" class="w-8 h-8"></i><p>No basic accessibility issues found. Great job!</p></div>`;
             }
             const renderIssue = issue => {
-                const colors = { Warning: 'border-yellow-400 bg-yellow-500/10 text-yellow-300', Contrast: 'border-orange-400 bg-orange-500/10 text-orange-300' };
-                const detailsHtml = issue.details ? `<div class="mt-2 text-sm flex flex-wrap items-center gap-x-4 gap-y-2"><span>Text: "${issue.details.text}..."</span><div class="flex items-center gap-2">Color: <span class="w-4 h-4 rounded border border-slate-500" style="background:${issue.details.color}"></span> ${issue.details.color}</div><div class="flex items-center gap-2">BG: <span class="w-4 h-4 rounded border border-slate-500" style="background:${issue.details.bgColor}"></span> ${issue.details.bgColor}</div></div>` : '';
+                const colors = { Warning: 'border-yellow-400 bg-yellow-500/10 text-yellow-300' };
                 return `<div class="border-l-4 p-4 rounded-r-lg ${colors[issue.type]}">
                             <p class="font-semibold">${issue.check}: ${issue.issue}</p>
-                            ${detailsHtml}
                             <code class="text-xs text-slate-400/80 mt-2 block bg-black/20 p-2 rounded break-words overflow-x-auto">${issue.element.replace(/</g, '&lt;')}</code>
                         </div>`;
             }
@@ -646,6 +686,58 @@
             return renderSection('Detected Technologies', content);
         }
 
+        // --- ACTION BUTTONS AND EVENT HANDLERS ---
+        function renderActionButtons(report) {
+            const downloadArea = $('#download-area');
+            if(!downloadArea) return;
+            downloadArea.innerHTML = `
+                <div class="flex gap-2">
+                    <button id="download-json-btn" class="flex-1 bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold py-2 px-3 rounded-lg flex items-center justify-center gap-2 focus-ring transition-colors duration-200 text-sm">
+                        <i data-lucide="download" class="w-4 h-4"></i><span>JSON</span>
+                    </button>
+                    <button id="copy-summary-btn" class="flex-1 bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold py-2 px-3 rounded-lg flex items-center justify-center gap-2 focus-ring transition-colors duration-200 text-sm">
+                        <i data-lucide="copy" class="w-4 h-4"></i><span>Copy Summary</span>
+                    </button>
+                </div>
+            `;
+            lucide.createIcons();
+            $('#download-json-btn').addEventListener('click', () => downloadAsJSON(report));
+            $('#copy-summary-btn').addEventListener('click', (e) => {
+                const summary = formatReportAsText(report);
+                copyToClipboard(summary, e.currentTarget);
+            });
+        }
+
+        function downloadAsJSON(report) {
+            const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+            const reportUrl = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = reportUrl;
+            a.download = `web-analyzer-report-${slugify(report.url)}.json`;
+            a.click();
+            URL.revokeObjectURL(reportUrl);
+        }
+
+        function formatReportAsText(report) {
+            const accScore = Math.max(0, 100 - report.accessibility.issues.length * 5);
+            const perfScore = Math.max(0, 100 - (report.performance.scripts.filter(s => !s.async && !s.defer).length + report.performance.inlineStyleBlocks) * 10);
+            const seoScore = Math.max(0, 100 - ((report.seo.headings.h1?.length !== 1 ? 1 : 0) + (!report.seo.description ? 1 : 0)) * 25);
+
+            let summary = `Web Analyzer Pro Report for: ${report.url}\n`;
+            summary += `Generated on: ${new Date(report.generatedAt).toLocaleString()}\n\n`;
+            summary += `--- SCORES ---\n`;
+            summary += `Accessibility: ${accScore}/100 (${report.accessibility.issues.length} issues)\n`;
+            summary += `Performance: ${perfScore}/100\n`;
+            summary += `SEO: ${seoScore}/100\n\n`;
+            summary += `--- TECH STACK ---\n`;
+            summary += `${report.techStack.join(', ') || 'N/A'}\n\n`;
+            summary += `--- SEO BASICS ---\n`;
+            summary += `Title: ${report.seo.title}\n`;
+            summary += `Description: ${report.seo.description || 'N/A'}\n`;
+            summary += `H1 Count: ${report.seo.headings.h1?.length || 0}\n`;
+            return summary;
+        }
+
         function injectSvgs() {
             $$('.svg-container').forEach(container => {
                 try {
@@ -671,27 +763,47 @@
                     $$('.tab-content').forEach(c => c.classList.add('hidden'));
                     tab.classList.add('border-blue-400', 'text-blue-300');
                     tab.classList.remove('border-transparent', 'text-slate-400', 'hover:text-slate-200', 'hover:border-slate-500');
-                    const contentElement = $(`#content-${tab.dataset.tab}`);
-                    if (contentElement) contentElement.classList.remove('hidden');
+                    $(`#content-${tab.dataset.tab}`)?.classList.remove('hidden');
                 });
             });
         }
         
         function addCopyEventListeners() {
-            const resultsState = $('#results-state');
-            if (!resultsState) return;
-            resultsState.addEventListener('click', (e) => {
+            $('#results-state').addEventListener('click', (e) => {
                 const copyButton = e.target.closest('.copy-btn');
                 if (copyButton) copyToClipboard(copyButton.dataset.copy, copyButton);
             });
         }
 
+        // --- INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
-            const extractBtn = $('#extractBtn');
-            const urlInput = $('#urlInput');
-            if (extractBtn) extractBtn.addEventListener('click', analyzeWebsite);
-            if (urlInput) urlInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') analyzeWebsite(); });
+            renderHistory();
+            $('#copyright-year').textContent = new Date().getFullYear();
+
+            $('#analyzeBtn').addEventListener('click', () => analyzeWebsite());
+            $('#urlInput').addEventListener('keypress', (e) => { if (e.key === 'Enter') analyzeWebsite(); });
+            
+            $$('.example-url-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    $('#urlInput').value = btn.textContent;
+                    analyzeWebsite();
+                });
+            });
+
+            $('#history-list').addEventListener('click', (e) => {
+                e.preventDefault();
+                const link = e.target.closest('.history-item-link');
+                const removeBtn = e.target.closest('.remove-history-item');
+                
+                if (link) {
+                    $('#urlInput').value = link.dataset.url;
+                    analyzeWebsite(link.dataset.url);
+                }
+                if (removeBtn) {
+                    removeFromHistory(removeBtn.dataset.url);
+                }
+            });
         });
     </script>
 </body>
